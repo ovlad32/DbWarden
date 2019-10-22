@@ -1,0 +1,10 @@
+package com.iotahoe.etdm.repositories;
+
+import com.iotahoe.etdm.entities.CDatabase;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CDatabaseRepository extends JpaRepository<CDatabase,Long> {
+
+}

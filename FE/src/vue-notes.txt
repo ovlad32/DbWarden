@@ -1,0 +1,127 @@
+1. string-interpolation {{ javascript-expression}}
+
+2. component structure
+---------------------
+data: {
+    data-property:value
+} or
+data: function() {
+
+},
+
+---
+
+methods: {
+method-name: function() {
+
+     }
+
+},
+
+
+3. Directives:
+---------------------
+v-bind:html-attribute="data-property or method-name"
+examples:
+     <a v-bind:href="urlToSomewhere" />
+     <div v-bind:title="title()">...</div>
+
+v-on:event="method-name" or "method-name()"
+
+examples:
+     methods:{
+          clickButton0:function(event) {alert("!");},
+          clickButton0:function(event,custom-argument) {alert("!!");} 
+     }
+     <button v-on:click="clickButton0"/>  <-- event is passed automatically
+     <button v-on:click="clickButton0()"/> <--event is undefined!
+     <button v-on:click="clickButton0($event)"/> <-- $event passed explicitly
+     <button v-on:click="clickButton1($event,{})"/> <-- with a custom parameter
+     <div v-on:click="method0">
+          <button v-on:click.stop="method1"/>  <-- .stop prevents click event propagation
+     </div
+     <button v-on:click.once="sensitiveMethod"/>  <-- .once prevents click event more than 1 time
+     <a v-on:click.prevent="someMethod (that can be ommited)"/>  <-- .prevent prevents default behaviour for its element
+     <button v-on:click.shift="shiftKeyMethod"/>  <-- .key modifier
+     <input type="text" v-on:keyup.enter="pressedEnter">
+     <input type="text" v-on:keyup.13="pressedEnter">
+     <input type="text" v-on:keyup.enter.space="pressedEnterOrSpaceKey">
+     <input type="text" v-on:keyup.shift.enter="pressedShiftAndEnter">
+
+4. data binding:
+---------------------
+ data:{ name:"default value", age:37}
+ ...
+ <input v-model="name" text="valueToBeIgnored">
+ <input v-model.trim="name" text="valueToBeIgnored">
+ <p>{{name}}</p>
+
+ <input v-model.number="age">
+ <p>Type: {{type of age}}</p> <<= Type: number 
+ 
+ <input v-model.number.lazy="age"> <<-- model update happens only when focus lost   
+v-html="htmlIjectionString" -- unsafe but possible
+<h1 v-once>{{Renderred once}}</h1>
+ 
+<p v-if="boolean expression 1"> something to be in DOM under condition 1 </p>
+<p v-else-if="boolean expression 2"> something to be in DOM under condition 2</p>
+<p v-else> something to be in DOM otherwise</p>
+<template v-if="expr"> <-- a way to control  inner divs in the DOM
+   <div>1</div>
+   <div>2</div>
+</template>
+<p v-show="boolean explression"> <-- show/hides element keeping in DOM
+
+v-cloak approach:
+---------------------
+<div id="vueApp">
+ <p v-cloak>{{someContent}}> 
+</div>
+<style>
+  [v-cloak] {display:none;}  <-- hidden until Vue is loaded
+<style>
+
+v-for abitlity
+---------------------
+data:{
+     items:[
+          {itemKey:"id1",title:"One",value:"First"},
+          {itemKey:"id2",title:"Two",value:"Second"},
+          {itemKey:"id3",title:"Three",value:"Third"}]
+     label:"no comment",
+     obj:{attr1:"value1",attr2:"value2"}
+}
+<table>
+<tr v-for="(item, indexIfNeeded) in items>
+<td>{{indexIfNeeded}}</td><td>{{item.title}}</td><td>{{item.value}}</td><td>{{label}}</td>
+</tr></table>
+<ul><li v-for="(value, propertyNameIfNeeded, indexIfNeeded) in obj>
+{{indexIfNeeded}} - {{propertyNameIfNeeded}} : {value}}
+</li></ul>
+v-for="(i,index) in 10"
+v-for="i in index" v-bind:key="i.itemKey"> <--to keep row DOM elements in accordance 
+!! if you're modifying backing array element use either 
+  1. Vue.set(arrayToBeChanged,IndexOfElement,newValue)
+
+!! Prefer using 'computed' over 'methods' as methods are called all the times 
+when page is rendered whereas computed if its data changes:
+,computed:{
+  fullName: function() {this.name="..."},
+  anotherComputed:{
+       set:function(newValue){...}
+       get:function(){return this.value}
+  }
+} 
+,methods:{
+     getFullName:function {this.name="..."}
+     //anotherComputed.set is being called 
+     changeAnotherValue:function() {anotherComputed = 'someNewValue' } 
+}
+
+
+
+
+ 
+
+     
+

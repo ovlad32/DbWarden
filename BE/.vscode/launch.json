@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Start",
+            "request": "launch",
+            "mainClass": "com.iotahoe.etdm.Start",
+            "projectName": "BE"
+        }
+    ]
+}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="initial" author="V">
+        <sql><![CDATA[
+
+            create sequence if not exists app_id;
+
+            create table if not exists r_database_type(
+               type varchar(50) not null,
+               name varchar(255),
+               driver varchar(255),
+               realm varchar(50),
+               i_order int,
+               constraint r_database_type_pk primary key(type),
+               constraint r_database_type_nnl__type check(type is not null and type = trim(type)),
+               constraint r_database_type_nnl__name check(name is not null and name = trim(name)),
+               constraint r_database_type_nnl__realm check(realm is not null and realm = trim(realm)),
+               constraint r_database_type_nnl__driver check(driver is not null and realm = trim(driver)),
+               constraint r_database_type_nnl__i_order check(i_order is not null)
+               );
+
+
+            create table if not exists c_database (
+                id bigint not null,
+                type varchar(50),
+                name varchar(50),
+                url varchar(2000),
+                login varchar(50),
+                password varchar(50),
+                constraint c_database_pk primary key(id),
+                constraint c_database_fk_type foreign key(type) references r_database_type(type),
+                constraint c_database_nnl__name check(name is not null and name = trim(name))
+                );
+
+            create table if not exists x_snapshot(
+                id bigint not null,
+                db_id  bigint,
+                taken timestamp,
+                constraint x_snapshot_pk primary key(id),
+                constraint x_snapshot_fk_db foreign key(db_id) references c_database(id),
+                constraint x_snapshot_nnl__taken check(taken is not null)
+                );
+
+            create table if not exists x_table(
+                id bigint not null,
+                db_id bigint,
+                ss_id bigint,
+                schema_name varchar(2000),
+                table_name varchar(2000),
+                row_count bigint,
+                bytes bigint,
+                constraint x_table_pk primary key(id),
+                constraint x_table_fk_db foreign key(db_id) references c_database(id),
+                constraint x_table_fk_ss foreign key(ss_id) references x_snapshot(id),
+                constraint x_table_nnl__ss_id check(ss_id is not null),
+                constraint x_table_nnl__db_id check(db_id is not null),
+                constraint x_table_nnl__t_name check(table_name is not null and table_name = trim(table_name)),
+                constraint x_table_nnl__s_name check(schema_name is not null and schema_name = trim(schema_name)),
+                constraint x_table_rg__row_count check(row_count is null or row_count >= 0),
+                constraint x_table_rg__bytes check(bytes is null or bytes >= 0)
+                );
+
+            create table if not exists x_table_column(
+                id bigint not null,
+                db_id bigint,
+                tb_id bigint,
+                ss_id bigint,
+                name varchar(2000),
+                unique_count bigint,
+                empty_count bigint,
+                constraint x_table_column_pk primary key(id),
+                constraint x_table_column_fk_db foreign key(db_id) references c_database(id),
+                constraint x_table_column_fk_ss foreign key(ss_id) references x_snapshot(id),
+                constraint x_table_column_fk_tb foreign key(tb_id) references x_table(id),
+                constraint x_table_column_nnl__ss_id check(ss_id is not null),
+                constraint x_table_column_nnl__db_id check(db_id is not null),
+                constraint x_table_column_nnl__tb_id check(tb_id is not null),
+                constraint x_table_column_nnl__name check(name is not null and name = trim(name)),
+                constraint x_table_column_rg__unique_count check(unique_count is null or unique_count >= 0),
+                constraint x_table_column_rg__empty_count check(empty_count is null or empty_count >= 0)
+                );
+
+        ]]></sql>
+    </changeSet>
+    <changeSet id="initial-data" author="V">
+        <sql><![CDATA[
+        insert into r_database_type values('ORACLE', 'Oracle', 'rdbms', 1000);
+        insert into r_database_type values('MSSQL', 'MS-SQL', 'rdbms', 2000);
+        insert into r_database_type values('SYBASE', 'Sybase', 'rdbms', 3000);
+        insert into r_database_type values('DB2-LUW', 'DB2 for LUW', 'rdbms', 4000);
+        insert into r_database_type values('DB2-ZOS', 'DB2 for zOS', 'rdbms', 5000);
+        insert into r_database_type values('DB2-AS400', 'DB2 for AS/400', 'rdbms', 6000);
+
+
+        ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="initial-grant" author="V">
+        <sql><![CDATA[
+        grant select,insert,update on r_database_type to dbwa;
+        grant select,insert,update on c_database to dbwa;
+        grant select,insert,update on x_snapshot to dbwa;
+        grant select,insert,update on x_table to dbwa;
+        grant select,insert,update on x_table_column to dbwa;
+        ]]></sql>
+    </changeSet>
+
+
+</databaseChangeLog>

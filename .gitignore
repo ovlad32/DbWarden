@@ -1,0 +1,12 @@
+.idea/
+*.iml
+.DS_Store
+target/
+tmp/*
+log/*
+data/*
+FE/bin
+FE/node
+boostrapjars/
+*/bootstrapjars/
+boostrapjars/*
