@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(schema = "dw",name = "x_table")
+@Table(schema = "dw", name = "x_table")
 @Data
 public class XTable {
     @Id

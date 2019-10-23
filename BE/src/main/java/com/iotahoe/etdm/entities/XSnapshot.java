@@ -1,10 +1,17 @@
 package com.iotahoe.etdm.entities;
 
-import lombok.Data;
-
-import javax.persistence.*;
-import java.sql.Date;
 import java.sql.Timestamp;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import lombok.Data;
 
 @Entity
 @Data
@@ -12,10 +19,9 @@ import java.sql.Timestamp;
 public class XSnapshot {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "appSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appSeq")
 
     private Long id;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "db_id")

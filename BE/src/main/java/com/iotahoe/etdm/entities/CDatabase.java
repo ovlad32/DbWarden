@@ -1,11 +1,9 @@
 package com.iotahoe.etdm.entities;
 
-
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(schema = "dbw", name = "c_database")
@@ -13,9 +11,11 @@ import javax.persistence.Table;
 public class CDatabase {
     @Id
     @SequenceGenerator(schema = "dbw", sequenceName = "app_id", name = "appSeq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "appSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appSeq")
     private Long Id;
-    private String type;
+    @Column(name = "type")
+    @ManyToOne(fetch = FetchType.EAGER)
+    RDatabaseType databaseType;
     private String name;
     private String url;
     private String login;

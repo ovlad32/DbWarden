@@ -10,14 +10,13 @@
             create table if not exists r_database_type(
                type varchar(50) not null,
                name varchar(255),
-               driver varchar(255),
                realm varchar(50),
+               driver text,
                i_order int,
                constraint r_database_type_pk primary key(type),
                constraint r_database_type_nnl__type check(type is not null and type = trim(type)),
                constraint r_database_type_nnl__name check(name is not null and name = trim(name)),
                constraint r_database_type_nnl__realm check(realm is not null and realm = trim(realm)),
-               constraint r_database_type_nnl__driver check(driver is not null and realm = trim(driver)),
                constraint r_database_type_nnl__i_order check(i_order is not null)
                );
 

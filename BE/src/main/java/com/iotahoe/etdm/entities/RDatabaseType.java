@@ -1,14 +1,13 @@
 package com.iotahoe.etdm.entities;
 
-import lombok.Data;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
-@Table(name="r_database_type")
+@Table(name = "r_database_type")
 @Data
 public class RDatabaseType {
     @Id
