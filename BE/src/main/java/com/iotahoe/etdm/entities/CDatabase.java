@@ -13,7 +13,6 @@ public class CDatabase {
     @SequenceGenerator(schema = "dbw", sequenceName = "app_id", name = "appSeq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appSeq")
     private Long Id;
-    @Column(name = "type")
     @ManyToOne(fetch = FetchType.EAGER)
     RDatabaseType databaseType;
     private String name;

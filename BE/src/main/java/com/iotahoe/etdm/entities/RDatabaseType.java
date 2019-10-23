@@ -14,6 +14,6 @@ public class RDatabaseType {
     private String type;
     private String name;
     private String realm;
-    private Integer iOrder;
     private String driver;
+    private Integer iOrder;
 }

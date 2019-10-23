@@ -10,7 +10,9 @@ import com.iotahoe.etdm.services.CDatabaseService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CDatabaseServiceImpl implements CDatabaseService {
     @Resource
     CDatabaseRepository databaseRepository;
