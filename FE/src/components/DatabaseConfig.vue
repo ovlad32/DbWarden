@@ -13,10 +13,10 @@
                   <span class="select">
                     <select id="typeFormId" class="select">
                       <option
-                        v-for="dbt in databaseTypeList"
-                        :key="dbt.databaseType"
-                        :value="{{dbt.databaseType}}"
-                        :label="{{dbt.databaseName}}"
+                        v-for="d in databaseTypeList"
+                        :key="d.type"
+                        :value="d.type"
+                        :label="d.name"
                       />
                     </select>
                   </span>
@@ -87,7 +87,7 @@ import {
   faServer,
   faAsterisk
 } from "@fortawesome/free-solid-svg-icons";
-import databaseConfig from "./components/Datasour.vue";
+//import databaseConfig from "./components/Datasour.vue";
 
 export default {
   data() {
@@ -98,17 +98,18 @@ export default {
       databaseTypeList: []
     };
   },
-  beforeMount() {
-    loadDatabaseTypes().then(result => (this.databaseTypeList = result));
+  created() {
+    this.loadDatabaseTypes().then(result => (this.databaseTypeList = result));
   },
-
-  loadDatabaseTypes() {
-    return this.$http.get("http://localhost:3001/dict/datatypes").then(
-      response => {
-        response.json();
-      },
-      response => alert("could not load database type list")
-    );
+  methods: {
+    loadDatabaseTypes() {
+      return this.$http
+        .get("http://localhost:8070/database/types")
+        .then(
+          response => response.json(),
+          response => alert("could not load database type list")
+        );
+    }
   }
 };
 </script>
