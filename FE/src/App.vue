@@ -27,15 +27,11 @@
 // import dataSourceTypeDDL from './components/DataSourceTypeDropDownList.vue';
 import databaseConfig from "./components/DatabaseConfig.vue";
 import navBar from "./components/NavBar.vue";
-import databaseTypes from "./data/databaseTypes.js";
+//import databaseTypes from "./data/databaseTypes.js";
+import store from "./store/index";
 
 export default {
   name: "V-Mail",
-  data() {
-    return {
-      databaseTypes: databaseTypes
-    };
-  },
   components: {
     // "datasource-type-ddl":dataSourceTypeDDL,
     "database-config": databaseConfig,
@@ -47,7 +43,7 @@ export default {
   ,
   created() {
     loadDatabaseTypes().then(result => (databaseTypes = response));
-  }*/
+  }
   methods: {
     loadDatabaseTypes() {
       return this.$http.get("http://localhost:3001/dict/datatypes").then(
@@ -57,6 +53,7 @@ export default {
         response => alert("could not load database type list")
       );
     }
-  }
+  },*/
+  store
 };
 </script>

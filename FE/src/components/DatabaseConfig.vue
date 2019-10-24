@@ -12,12 +12,7 @@
                 <p class="control is-expanded has-icons-left">
                   <span class="select">
                     <select id="typeFormId" class="select">
-                      <option
-                        v-for="d in databaseTypeList"
-                        :key="d.type"
-                        :value="d.type"
-                        :label="d.name"
-                      />
+                      <option v-for="d in types" :key="d.type" :value="d.type" :label="d.name" />
                     </select>
                   </span>
                   <span class="icon is-small is-left">
@@ -88,27 +83,25 @@ import {
   faAsterisk
 } from "@fortawesome/free-solid-svg-icons";
 //import databaseConfig from "./components/Datasour.vue";
-
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
       databaseTypeIcon: faFolder,
       urlIcon: faServer,
-      databaseConfigIcon: faAsterisk,
-      databaseTypeList: []
+      databaseConfigIcon: faAsterisk
     };
   },
+  computed: mapState({
+    types: state => state.databaseConfig.types
+  }),
+
   created() {
-    this.loadDatabaseTypes().then(result => (this.databaseTypeList = result));
+    this.loadDatabaseTypes();
   },
   methods: {
     loadDatabaseTypes() {
-      return this.$http
-        .get("http://localhost:8070/database/types")
-        .then(
-          response => response.json(),
-          response => alert("could not load database type list")
-        );
+      this.$store.dispatch("databaseConfig/getTypes");
     }
   }
 };
