@@ -6,12 +6,12 @@ const state = {
 const getters = {};
 const actions = {
   getTypes({ commit }) {
-    api.getTypes(resp => commit("putTypes", resp.data));
+    api.getTypes().then(r => commit("storeTypes", r.data));
   }
 };
 
 const mutations = {
-  putTypes(state, data) {
+  storeTypes(state, data) {
     state.types = data;
   }
 };

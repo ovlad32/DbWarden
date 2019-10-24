@@ -84,24 +84,35 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 //import databaseConfig from "./components/Datasour.vue";
 import { mapState, mapActions } from "vuex";
+import databaseConfigAPI from "../api/databaseConfig";
 export default {
   data() {
     return {
       databaseTypeIcon: faFolder,
       urlIcon: faServer,
-      databaseConfigIcon: faAsterisk
+      databaseConfigIcon: faAsterisk,
+      types: []
     };
   },
-  computed: mapState({
-    types: state => state.databaseConfig.types
-  }),
+  //computed: mapState({
+  //types: state => state.databaseConfig.types
+  //}),
+  /*computed: {
+    types() {
+      return this.types_;
+    }
+  },*/
 
   created() {
-    this.loadDatabaseTypes();
+    databaseConfigAPI.getTypes().then(r => {
+      this.types = r.data;
+      //alert(r.data);
+    });
+    //this.loadDatabaseTypes();
   },
   methods: {
     loadDatabaseTypes() {
-      this.$store.dispatch("databaseConfig/getTypes");
+      //this.$store.dispatch("databaseConfig/getTypes");
     }
   }
 };

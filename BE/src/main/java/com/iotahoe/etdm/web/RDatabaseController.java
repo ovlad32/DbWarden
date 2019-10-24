@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/database")
+@RequestMapping("/databases")
 public class RDatabaseController {
     // private static Logger log =
     // org.slf4j.LoggerFactory.getLogger(RDatabaseController.class);
