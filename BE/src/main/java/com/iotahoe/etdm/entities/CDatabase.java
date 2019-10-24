@@ -14,6 +14,7 @@ public class CDatabase {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appSeq")
     private Long Id;
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "type")
     RDatabaseType databaseType;
     private String name;
     private String url;

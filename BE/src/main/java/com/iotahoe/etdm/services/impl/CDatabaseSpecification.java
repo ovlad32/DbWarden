@@ -1,6 +1,7 @@
 package com.iotahoe.etdm.services.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import com.iotahoe.etdm.entities.RDatabaseType_;
 import org.springframework.data.jpa.domain.Specification;
 
 public class CDatabaseSpecification implements Specification<CDatabase> {
+    private static final long serialVersionUID = 1L;
     Map<String, String> filters;
 
     public CDatabaseSpecification(Map<String, String> filters) {
@@ -24,21 +26,24 @@ public class CDatabaseSpecification implements Specification<CDatabase> {
 
     @Override
     public Predicate toPredicate(Root<CDatabase> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+        if (filters == null) {
+            filters = Collections.emptyMap();
+        }
         List<Predicate> preds = new ArrayList<>();
         String value = filters.get("type");
         if (value != null && !"all".equals(value.toLowerCase())) {
             preds.add(builder.and(builder.equal(root.join(CDatabase_.databaseType).get(RDatabaseType_.type), value)));
         }
         value = filters.get("url");
-        if (value != null && !value.isEmpty())) {
+        if (value != null && !value.isEmpty()) {
             preds.add(builder.and(builder.like(root.join(CDatabase_.url), wildCards(value))));
         }
-        
+
         value = filters.get("name");
-        if (value != null && !value.isEmpty())) {
+        if (value != null && !value.isEmpty()) {
             preds.add(builder.and(builder.like(root.join(CDatabase_.url), wildCards(value))));
         }
-        
+
         return builder.and(preds.toArray(new Predicate[preds.size()]));
     }
 
