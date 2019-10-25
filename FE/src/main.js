@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
-import VueResource from "vue-resource";
+import Buefy from "buefy";
+import "buefy/dist/buefy.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCoffee, faDatabase } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +19,7 @@ library.add(faCoffee);
 library.add(faDatabase);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
-Vue.use(VueResource);
+Vue.use(Buefy);
 
 Vue.config.productionTip = false;
 

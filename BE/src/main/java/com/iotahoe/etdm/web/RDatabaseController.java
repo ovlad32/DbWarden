@@ -40,7 +40,7 @@ public class RDatabaseController {
 
     @RequestMapping(value = "all")
     @ResponseStatus(HttpStatus.OK)
-    public Page<CDatabase> getAll(@PageableDefault Pageable pageable,
+    public Page<CDatabase> getsAll(@PageableDefault Pageable pageable,
             @RequestBody(required = false) Map<String, String> filters) {
         return databaseService.all(pageable, filters);
     }
