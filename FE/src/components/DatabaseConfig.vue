@@ -16,7 +16,7 @@
                     </select>
                   </span>
                   <span class="icon is-small is-left">
-                    <font-awesome-icon :icon="databaseTypeIcon" />
+                    <fa icon="folder" />
                     <!-- <i class="fas fa-database"></i> -->
                   </span>
                 </p>
@@ -31,7 +31,7 @@
               <p class="control is-expanded has-icons-left">
                 <input id="urlFormId" class="input" type="text" placeholder size="50" />
                 <span class="icon is-small is-left">
-                  <font-awesome-icon :icon="urlIcon" />
+                  <fa icon="server" />
                 </span>
               </p>
             </div>
@@ -44,7 +44,7 @@
               <p class="control is-expanded has-icons-left">
                 <input class="input" id="aliasFormId" type="text" placeholder size="50" />
                 <span class="icon is-small is-left">
-                  <font-awesome-icon :icon="databaseConfigIcon" />
+                  <fa icon="database" />
                 </span>
               </p>
             </div>
@@ -77,20 +77,11 @@
 
 
 <script>
-import {
-  faFolder,
-  faServer,
-  faAsterisk
-} from "@fortawesome/free-solid-svg-icons";
-//import databaseConfig from "./components/Datasour.vue";
-import { mapState, mapActions } from "vuex";
+//import { mapState, mapActions } from "vuex";
 import databaseConfigAPI from "../api/databaseConfig";
 export default {
   data() {
     return {
-      databaseTypeIcon: faFolder,
-      urlIcon: faServer,
-      databaseConfigIcon: faAsterisk,
       types: []
     };
   },

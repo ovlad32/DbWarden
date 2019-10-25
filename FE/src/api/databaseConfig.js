@@ -2,17 +2,17 @@ import api from "./api";
 
 export default {
   getTypes() {
-    return api
-      .get("databases/types")
-      .catch(e => console.error("Could not retrieve datasource types:", e));
+    return api.get("databases/types").catch(e => {
+      throw new Error("Could not retrieve datasource types:", e);
+    });
   },
-  get(filters) {
+  getAll(filters) {
     return api({
       method: "GET",
-      url: "databases",
+      url: "databases/all",
       params: filters
-    }).catch(e =>
-      console.error("Could not retrieve database configurations", e)
-    );
+    }).catch(e => {
+      throw new Error("Could not retrieve database configurations", e);
+    });
   }
 };

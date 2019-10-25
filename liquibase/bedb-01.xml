@@ -93,6 +93,10 @@
         insert into r_database_type values('DB2-AS400', 'DB2 for AS/400', 'rdbms', 'no-class-yet', 6000);
 
 
+insert into dbw.c_database
+values (1,'ORACLE','Oracle AWS','jdbc:oracle:thin:@oracle.aws.io-tahoe.com:1521:orcl','admin','admin-password')
+
+
         ]]>
         </sql>
     </changeSet>

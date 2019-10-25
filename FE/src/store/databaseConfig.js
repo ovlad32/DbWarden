@@ -9,10 +9,8 @@ const actions = {
   getTypes({ commit }) {
     api.getTypes().then(r => commit("storeTypes", r.data));
   },
-  get({ commit }, filters) {
-    api
-      .getDatabaseComfigs(filters)
-      .then(r => commit("storeDatabaseConfigs", r.data));
+  getAll({ commit }, filters) {
+    api.getAll(filters).then(r => commit("storeDatabaseConfigs", r.data));
   }
 };
 

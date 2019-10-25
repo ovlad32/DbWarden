@@ -4,21 +4,18 @@ import Buefy from "buefy";
 import "buefy/dist/buefy.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCoffee, faDatabase } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { dom } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon as fa } from "@fortawesome/vue-fontawesome";
 
-//import '@fortawesome/fontawesome-free';
-
-///* "bootstrap": "^4.3.1",*/
-
-//import 'bootstrap/dist/css/bootstrap.min.css';
 require("./assets/style.css");
 require("./assets/main.scss");
 
-library.add(faCoffee);
-library.add(faDatabase);
+dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
 
-Vue.component("font-awesome-icon", FontAwesomeIcon);
+library.add(fas);
+
+Vue.component("fa", fa);
 Vue.use(Buefy);
 
 Vue.config.productionTip = false;

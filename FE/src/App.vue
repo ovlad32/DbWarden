@@ -15,6 +15,7 @@
          <i class="fas fa-database" style="color:blue;"/>
     -->
     <database-config />
+    <database-config-table />
   </section>
 </template>
 
@@ -26,6 +27,7 @@
     */
 // import dataSourceTypeDDL from './components/DataSourceTypeDropDownList.vue';
 import databaseConfig from "./components/DatabaseConfig.vue";
+import databaseConfigTable from "./components/DatabaseConfigTable.vue";
 import navBar from "./components/NavBar.vue";
 //import databaseTypes from "./data/databaseTypes.js";
 import store from "./store/index";
@@ -35,6 +37,7 @@ export default {
   components: {
     // "datasource-type-ddl":dataSourceTypeDDL,
     "database-config": databaseConfig,
+    "database-config-table": databaseConfigTable,
     "nav-bar": navBar
     //   appSidebar: Sidebar,
     //  appContent: Content
