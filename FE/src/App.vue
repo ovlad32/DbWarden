@@ -16,6 +16,7 @@
     -->
     <database-config />
     <database-config-table />
+    <database-config-detail service-user="admin" updated="12/19/2015" status="available" />
   </section>
 </template>
 
@@ -27,17 +28,19 @@
     */
 // import dataSourceTypeDDL from './components/DataSourceTypeDropDownList.vue';
 import databaseConfig from "./components/DatabaseConfig.vue";
+import databaseConfigDetail from "./components/DatabaseConfigDetail.vue";
 import databaseConfigTable from "./components/DatabaseConfigTable.vue";
 import navBar from "./components/NavBar.vue";
 //import databaseTypes from "./data/databaseTypes.js";
 import store from "./store/index";
 
 export default {
-  name: "V-Mail",
+  name: "DbWatcher",
   components: {
     // "datasource-type-ddl":dataSourceTypeDDL,
     "database-config": databaseConfig,
     "database-config-table": databaseConfigTable,
+    databaseConfigDetail,
     "nav-bar": navBar
     //   appSidebar: Sidebar,
     //  appContent: Content
