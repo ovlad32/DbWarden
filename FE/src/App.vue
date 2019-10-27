@@ -14,9 +14,11 @@
          <i class="fa fa-coffee"/>
          <i class="fas fa-database" style="color:blue;"/>
     -->
-    <database-config />
+    <router-view></router-view>
+    <!--<database-config />
     <database-config-table />
     <database-config-detail service-user="admin" updated="12/19/2015" status="available" />
+    -->
   </section>
 </template>
 
@@ -27,9 +29,9 @@
     import messages from './data/messages';
     */
 // import dataSourceTypeDDL from './components/DataSourceTypeDropDownList.vue';
-import databaseConfig from "./components/DatabaseConfig.vue";
-import databaseConfigDetail from "./components/DatabaseConfigDetail.vue";
-import databaseConfigTable from "./components/DatabaseConfigTable.vue";
+//import databaseConfig from "./components/DatabaseConfig.vue";
+//import databaseConfigDetail from "./components/DatabaseConfigDetail.vue";
+//import databaseConfigTable from "./components/DatabaseConfigTable.vue";
 import navBar from "./components/NavBar.vue";
 //import databaseTypes from "./data/databaseTypes.js";
 import store from "./store/index";
@@ -38,9 +40,9 @@ export default {
   name: "DbWatcher",
   components: {
     // "datasource-type-ddl":dataSourceTypeDDL,
-    "database-config": databaseConfig,
-    "database-config-table": databaseConfigTable,
-    databaseConfigDetail,
+    //"database-config": databaseConfig,
+    //"database-config-table": databaseConfigTable,
+    //databaseConfigDetail,
     "nav-bar": navBar
     //   appSidebar: Sidebar,
     //  appContent: Content

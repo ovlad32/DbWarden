@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import databaseConfig from "./databaseConfig";
+import Databases from "./databases";
 
 Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
-    databaseConfig
+    Databases
   }
 });

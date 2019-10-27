@@ -78,7 +78,7 @@
 
 <script>
 //import { mapState, mapActions } from "vuex";
-import databaseConfigAPI from "../api/databaseConfig";
+import databaseConfigAPI from "../api/databases";
 export default {
   data() {
     return {

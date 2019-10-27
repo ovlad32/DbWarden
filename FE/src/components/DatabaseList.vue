@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import DcApi from "../api/databaseConfig";
+import DcApi from "../api/databases";
 
 export default {
   data() {
