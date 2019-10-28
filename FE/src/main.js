@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
+import "bulma-helpers/css/bulma-helpers.min.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { dom } from "@fortawesome/fontawesome-svg-core";

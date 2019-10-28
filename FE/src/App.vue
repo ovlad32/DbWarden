@@ -1,27 +1,22 @@
 <template>
-  <section>
+  <div class="view">
     <nav-bar />
-
-    <!-- <datasource-type-ddl :payload="databaseTypes"/> -->
-    <!--<div class="mail-box">
-            <app-sidebar :messages="messages"></app-sidebar>
-            <app-content></app-content>
-        </div>
-    -->
-    <!-- <button class="button is-primary">primary button</button> -->
-    <!-- <font-awesome-icon icon="coffee" style="color: Tomato" /> 
-         <font-awesome-icon icon="database" style="color: Tomato" /> 
-         <i class="fa fa-coffee"/>
-         <i class="fas fa-database" style="color:blue;"/>
-    -->
-    <router-view></router-view>
-    <!--<database-config />
-    <database-config-table />
-    <database-config-detail service-user="admin" updated="12/19/2015" status="available" />
-    -->
-  </section>
+    <div class="routed">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
-
+<style scoped>
+.view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-content: stretch;
+}
+.routed {
+  align-self: stretch;
+}
+</style>
 <script>
 /*import Sidebar from './components/Sidebar.vue';
     import Content from './components/Content.vue';
