@@ -28,7 +28,12 @@
         </template>
       </b-table>
     </div>
-    <database-item v-for="r in rows" v-bind:key="r.id" :name="r.name" />
+    <database-item
+      v-for="r in rows"
+      v-bind:key="r.id"
+      :dbName="r.name"
+      :dbType="r.databaseType.type"
+    />
   </div>
 </template>
 <style scoped>

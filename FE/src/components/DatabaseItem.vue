@@ -1,6 +1,7 @@
 <template>
   <div class="box">
-    <p class="title">{{name}}</p>
+    <img v-bind:src="icon" :title="dbType" />&nbsp;
+    <p class="title">{{dbName}}</p>
   </div>
 </template>
 <style scoped>
@@ -15,12 +16,16 @@
   background-color: ivory;
   padding: 0.8em;
 }
+.box .logo {
+  display: inline;
+}
 .box:hover {
   border-style: outset;
   border-width: 2px;
 }
 
 .title {
+  display: inline;
   white-space: nowrap;
   font-size: 0.8em;
   font-weight: bold;
@@ -31,9 +36,31 @@
 <script>
 export default {
   props: {
-    name: {
+    dbType: {
       type: String,
       requited: true
+    },
+    dbName: {
+      type: String,
+      requited: true
+    }
+  },
+  computed: {
+    icon() {
+      //var pathToIcons = "../assets/db-icons/";
+      var iconfile = "";
+      switch (this.dbType) {
+        case "ORACLE":
+          iconfile = "oracle.svg";
+          break;
+        case "SYBASE":
+          iconfile = "sybase.svg";
+          break;
+        default:
+          iconfile = "default.svg";
+          break;
+      }
+      return require(`@/assets/db-icons/${iconfile}`);
     }
   }
 };
