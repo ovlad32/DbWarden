@@ -1,19 +1,21 @@
 <template>
-  <div class="view">
-    <nav-bar />
-    <div class="routed">
-      <router-view></router-view>
+  <div class="container is-fluid is-fullheight">
+    <div class="hero">
+      <nav-bar />
     </div>
+    <router-view></router-view>
   </div>
 </template>
 <style scoped>
-.view {
+.main-view {
+  flex: 1;
   display: flex;
+  align-self: stretch;
   flex-direction: column;
-  height: 100%;
-  align-content: stretch;
 }
-.routed {
+.routed-view {
+  display: flex;
+  flex: 1;
   align-self: stretch;
 }
 </style>

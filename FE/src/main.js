@@ -19,7 +19,9 @@ library.add(fas);
 Vue.component("fa", fa);
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
 
-Vue.use(Buefy);
+Vue.use(Buefy, {
+  defaultIconPack: "fas"
+});
 
 Vue.config.productionTip = false;
 
