@@ -2,8 +2,12 @@ package com.iotahoe.etdm.entities;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+
 import javax.persistence.*;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(schema = "dbw", name = "c_database")
@@ -20,4 +24,7 @@ public class CDatabase {
     private String url;
     private String login;
     private String password;
+
+    @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentLocalDate")
+    private LocalDate lastAvailable;
 }

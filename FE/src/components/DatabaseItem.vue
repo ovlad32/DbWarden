@@ -1,66 +1,61 @@
 <template>
   <div class="box">
-    <img v-bind:src="icon" :title="dbType" />&nbsp;
-    <p class="title">{{dbName}}</p>
+    <div class="logo">
+      <img v-bind:src="item.iconFile" :title="item.type" width="32" height="32" />&nbsp;
+      <p class="title">{{item.name}}</p>
+    </div>
+    <div class="dashboard">
+      <router-link :to="{name:'database-edit',params:{id:item.id}}">
+        <a class="icon is-small is-left" />
+      </router-link>
+    </div>
+    <div class="status"></div>
   </div>
 </template>
 <style scoped>
 .box {
+  display: flex;
+  flex-direction: column;
   width: 10em;
   height: 13em;
+  background-color: ivory;
   border-style: solid;
   border-width: 2px;
-  border-color: rgb(200, 200, 168);
+  border-color: lightgray;
   border-radius: 10%;
   margin: 1em;
-  background-color: ivory;
   padding: 0.8em;
-}
-.box .logo {
-  display: inline;
 }
 .box:hover {
   border-style: outset;
-  border-width: 2px;
+}
+.logo {
+  display: flex;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 0.5em;
+}
+.logo img {
+  display: inline;
 }
 
-.title {
-  display: inline;
+.logo .title {
+  align-self: center;
+  flex-grow: 1;
   white-space: nowrap;
   font-size: 0.8em;
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.dashboard {
+}
 </style>
 <script>
 export default {
   props: {
-    dbType: {
-      type: String,
+    item: {
+      type: Object,
       requited: true
-    },
-    dbName: {
-      type: String,
-      requited: true
-    }
-  },
-  computed: {
-    icon() {
-      //var pathToIcons = "../assets/db-icons/";
-      var iconfile = "";
-      switch (this.dbType) {
-        case "ORACLE":
-          iconfile = "oracle.svg";
-          break;
-        case "SYBASE":
-          iconfile = "sybase.svg";
-          break;
-        default:
-          iconfile = "default.svg";
-          break;
-      }
-      return require(`@/assets/db-icons/${iconfile}`);
     }
   }
 };

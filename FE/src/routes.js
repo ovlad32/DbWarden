@@ -4,10 +4,21 @@ import DatabaseEdit from "./components/DatabaseEdit.vue";
 const routes = [
   { path: "/", redirect: "/databases" },
   {
+    name: "databases",
     path: "/databases",
     component: DatabaseList
   },
-  { path: "/databases/:id", component: DatabaseEdit, props: true }
+  {
+    name: "database-new",
+    path: "/databases/new",
+    component: DatabaseEdit
+  },
+  {
+    name: "database-edit",
+    path: "/databases/:id",
+    component: DatabaseEdit,
+    props: true
+  }
 ];
 
 export default {

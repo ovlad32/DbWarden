@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import com.iotahoe.etdm.entities.CDatabase;
 import com.iotahoe.etdm.services.CDatabaseService;
 import com.iotahoe.etdm.services.RDatabaseTypeService;
+import com.iotahoe.etdm.services.reqresp.*;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +33,7 @@ public class RDatabaseController {
     @Resource
     CDatabaseService databaseService;
 
-    @RequestMapping(value = "/types", method = RequestMethod.GET)
+    @RequestMapping(value = "types", method = RequestMethod.GET)
 
     public ResponseEntity<?> allDatabaseTypes() {
         return ResponseEntity.ok(databaseTypeService.getAll());
@@ -40,9 +41,15 @@ public class RDatabaseController {
 
     @RequestMapping(value = "all")
     @ResponseStatus(HttpStatus.OK)
-    public Page<CDatabase> getsAll(@PageableDefault Pageable pageable,
+    public Page<CDatabaseResp> getsAll(@PageableDefault Pageable pageable,
             @RequestBody(required = false) Map<String, String> filters) {
         return databaseService.all(pageable, filters);
+    }
+
+    @RequestMapping(value = "check", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> checkConnection(@RequestBody(required = true) CDatabaseReq req) {
+        return ResponseEntity.ok(databaseService.checkConnection(req));
     }
 
 }

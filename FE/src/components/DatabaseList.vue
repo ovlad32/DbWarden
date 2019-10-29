@@ -31,8 +31,12 @@
     <database-item
       v-for="r in rows"
       v-bind:key="r.id"
-      :dbName="r.name"
-      :dbType="r.databaseType.type"
+      :item="{
+        id:r.id,
+        name:r.name,
+        type:r.databaseType.type,
+        iconFile:iconFile(r.databaseType.type)
+        }"
     />
   </div>
 </template>
@@ -66,10 +70,14 @@ export default {
       showDetailIcon: true
     };
   },
-  computed: {},
+  methods: {
+    iconFile(type) {
+      return DcApi.getIconFileName(type);
+    }
+  },
   mounted() {
     DcApi.getAll().then(resp => {
-      var data = resp.data;
+      let data = resp.data;
       this.rows = data.content;
       this.paginated = true;
       this.perPage = data.size;

@@ -14,5 +14,21 @@ export default {
     }).catch(e => {
       throw new Error("Could not retrieve database configurations", e);
     });
+  },
+
+  getIconFileName(dbType) {
+    var iconfile = "";
+    switch (dbType) {
+      case "ORACLE":
+        iconfile = "oracle.svg";
+        break;
+      case "SYBASE":
+        iconfile = "sybase.svg";
+        break;
+      default:
+        iconfile = "default.svg";
+        break;
+    }
+    return require(`@/assets/db-icons/${iconfile}`);
   }
 };
