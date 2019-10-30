@@ -25,10 +25,4 @@ public class RDatabaseTypeServiceImpl implements RDatabaseTypeService {
         return result;
     }
 
-    @Override
-    public DataSource dataSource(RDatabaseType type) {
-        DataSource source = new DriverManagerDataSource(type.getDriver());
-        return source;
-    }
-
 }

@@ -20,7 +20,7 @@ public class CDatabase {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type")
     RDatabaseType databaseType;
-    private String name;
+    private String alias;
     private String url;
     private String login;
     private String password;

@@ -16,6 +16,7 @@ import com.iotahoe.etdm.entities.RDatabaseType;
 import com.iotahoe.etdm.repositories.CDatabaseRepository;
 import com.iotahoe.etdm.repositories.RDatabaseTypeRepository;
 import com.iotahoe.etdm.services.CDatabaseService;
+import com.iotahoe.etdm.services.IDatabaseReq;
 import com.iotahoe.etdm.services.mapper.CDatabaseMapper;
 import com.iotahoe.etdm.services.reqresp.CDatabaseReq;
 import com.iotahoe.etdm.services.reqresp.CDatabaseResp;
@@ -38,7 +39,7 @@ public class CDatabaseServiceImpl implements CDatabaseService {
                 .map(t -> CDatabaseMapper.INSTANCE.toResp(t));
     }
 
-    private DataSource buildDataSource(CDatabaseReq req) {
+    private DataSource buildDataSource(IDatabaseReq req) {
         RDatabaseType rtype = databaseTypeRepository.findByType(req.getType());
         if (rtype == null) {
             throw new IllegalArgumentException("DBMS type is not recognized");
@@ -56,7 +57,8 @@ public class CDatabaseServiceImpl implements CDatabaseService {
         }
     }
 
-    private Map<String, String> validateRequest(CDatabaseReq req) {
+    @Override
+    public Map<String, String> validateRequest(IDatabaseReq req) {
         Map<String, String> messages = new HashMap<>();
 
         if (Objects.isNull(req.getType())) {
@@ -88,10 +90,11 @@ public class CDatabaseServiceImpl implements CDatabaseService {
         } else if (req.getPassword().trim().isEmpty()) {
             messages.put("password", "Password is not specified");
         }
+        return messages;
     }
 
     @Override
-    public CDatabaseResp checkConnection(CDatabaseReq req) {
+    public CDatabaseResp checkConnection(IDatabaseReq req) {
         CDatabaseResp resp = CDatabaseResp.builder().errorMessages(Collections.emptyMap()).build();
         Map<String, String> messages = validateRequest(req);
         if (!messages.isEmpty()) {
@@ -106,7 +109,11 @@ public class CDatabaseServiceImpl implements CDatabaseService {
             return resp;
         }
         try (Connection conn = ds.getConnection()) {
-            conn.getMetaData()
+            try {
+                conn.rollback();
+            } catch (Throwable e) {
+            }
+
         } catch (SQLException e) {
             resp.getErrorMessages().put("*", e.getMessage());
             return resp;

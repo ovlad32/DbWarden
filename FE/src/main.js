@@ -1,8 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Buefy from "buefy";
-import "buefy/dist/buefy.css";
-import "bulma-helpers/css/bulma-helpers.min.css";
+//import Buefy from "buefy";
+//import "buefy/dist/buefy.css";
+//import "bulma-helpers/css/bulma-helpers.min.css";
+
+import BootstrapVue from "bootstrap-vue";
+Vue.use(BootstrapVue);
+
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { dom } from "@fortawesome/fontawesome-svg-core";
@@ -18,10 +24,11 @@ require("./assets/main.scss");
 library.add(fas);
 Vue.component("fa", fa);
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
-
+/*
 Vue.use(Buefy, {
   defaultIconPack: "fas"
 });
+*/
 
 Vue.config.productionTip = false;
 

@@ -1,12 +1,12 @@
 <template>
   <div class="box">
-    <div class="logo">
-      <img v-bind:src="item.iconFile" :title="item.type" width="32" height="32" />&nbsp;
-      <p class="title">{{item.name}}</p>
+    <div class="title">
+      <img v-bind:src="iconFile" :title="type" width="32" height="32" />&nbsp;
+      <p class="alias">{{alias}}</p>
     </div>
     <div class="dashboard">
-      <router-link :to="{name:'database-edit',params:{id:item.id}}">
-        <a class="icon is-small is-left" />
+      <router-link :to="{name:'database-edit',params:{id}}">
+        <a class="icon is-small is-left">123</a>
       </router-link>
     </div>
     <div class="status"></div>
@@ -16,33 +16,32 @@
 .box {
   display: flex;
   flex-direction: column;
-  width: 10em;
-  height: 13em;
+  width: 10rem;
+  height: 15rem;
   background-color: ivory;
   border-style: solid;
   border-width: 2px;
   border-color: lightgray;
   border-radius: 10%;
-  margin: 1em;
-  padding: 0.8em;
+  padding: 0.8rem;
 }
 .box:hover {
   border-style: outset;
 }
-.logo {
+.title {
   display: flex;
   border-bottom: 1px solid lightgray;
-  padding-bottom: 0.5em;
+  padding-bottom: 0.5rem;
 }
-.logo img {
+.title img {
   display: inline;
 }
 
-.logo .title {
+.title .alias {
   align-self: center;
   flex-grow: 1;
   white-space: nowrap;
-  font-size: 0.8em;
+  font-size: 0.8rem;
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -51,11 +50,26 @@
 }
 </style>
 <script>
+import DcApi from "../api/databases";
+
 export default {
   props: {
-    item: {
-      type: Object,
+    id: {
+      type: Number,
       requited: true
+    },
+    type: {
+      type: String,
+      requited: true
+    },
+    alias: {
+      type: String,
+      requited: true
+    }
+  },
+  computed: {
+    iconFile() {
+      return DcApi.getIconFileName(this.type);
     }
   }
 };

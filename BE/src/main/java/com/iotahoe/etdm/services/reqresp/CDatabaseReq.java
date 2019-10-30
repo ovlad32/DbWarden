@@ -1,9 +1,10 @@
 package com.iotahoe.etdm.services.reqresp;
 
 import lombok.Data;
+import com.iotahoe.etdm.services.*;
 
 @Data
-public class CDatabaseReq {
+public class CDatabaseReq implements IDatabaseReq {
     Integer id;
     String type;
     String alias;

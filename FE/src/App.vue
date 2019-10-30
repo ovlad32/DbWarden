@@ -1,23 +1,10 @@
 <template>
-  <div class="container is-fluid is-fullheight">
-    <div class="hero">
-      <nav-bar />
-    </div>
+  <div class="container flex-column w-100">
+    <nav-bar />
     <router-view></router-view>
   </div>
 </template>
 <style scoped>
-.main-view {
-  flex: 1;
-  display: flex;
-  align-self: stretch;
-  flex-direction: column;
-}
-.routed-view {
-  display: flex;
-  flex: 1;
-  align-self: stretch;
-}
 </style>
 <script>
 /*import Sidebar from './components/Sidebar.vue';

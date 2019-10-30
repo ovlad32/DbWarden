@@ -39,9 +39,9 @@ public class CDatabaseSpecification implements Specification<CDatabase> {
             preds.add(builder.and(builder.like(root.join(CDatabase_.url), wildCards(value))));
         }
 
-        value = filters.get("name");
+        value = filters.get("alias");
         if (value != null && !value.isEmpty()) {
-            preds.add(builder.and(builder.like(root.join(CDatabase_.url), wildCards(value))));
+            preds.add(builder.and(builder.like(root.join(CDatabase_.alias), wildCards(value))));
         }
 
         return builder.and(preds.toArray(new Predicate[preds.size()]));

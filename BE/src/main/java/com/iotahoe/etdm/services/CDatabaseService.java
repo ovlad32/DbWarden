@@ -13,5 +13,7 @@ import org.springframework.http.ResponseEntity;
 public interface CDatabaseService {
     Page<CDatabaseResp> all(Pageable pageable, Map<String, String> filters);
 
-    CDatabaseResp checkConnection(CDatabaseReq req);
+    Map<String, String> validateRequest(IDatabaseReq req);
+
+    CDatabaseResp checkConnection(IDatabaseReq req);
 }

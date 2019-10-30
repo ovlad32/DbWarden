@@ -11,7 +11,7 @@
             <div class="field">
               <p class="control is-expanded has-icons-left">
                 <span class="select">
-                  <select id="typeFormId" class="select" v-model="item.databaseType.type">
+                  <select id="typeFormId" class="select" v-model="item.type">
                     <option v-for="d in types" :key="d.type" :value="d.type" :label="d.name" />
                   </select>
                 </span>
@@ -49,7 +49,7 @@
           <div class="field-body">
             <p class="control is-expanded has-icons-left">
               <input
-                v-model="item.name"
+                v-model="item.alias"
                 class="input"
                 id="aliasFormId"
                 type="text"
@@ -145,9 +145,7 @@
 import dcAPI from "../api/databases";
 export default {
   props: {
-    id: {
-      required: false
-    }
+    id: { type: Number }
   },
   data() {
     return {
@@ -157,12 +155,12 @@ export default {
   },
   methods: {
     save() {
-      dcAPI.save(Object.asign({},this.item))
-    }
+      dcAPI.save(this.item);
+    },
     checkParams() {
-      dcAPI.checkParams(Object.asign({},this.item));
+      dcAPI.checkParams(this.item);
     }
-  }
+  },
   mounted() {
     dcAPI.getTypes().then(r => {
       this.types = r.data;
