@@ -1,8 +1,8 @@
 <template>
-  <div class="d-flex flex-column align-self-stretch">
+  <div class="d-flex flex-column flex-grow-1 overflow-y-scroll">
     <router-link :to="{name:'database-new'}" class="ml-auto my-2 button is-primary">New Database</router-link>
 
-    <div class="flex-grow-1 align-self-stretch" style="background-color:blue">
+    <div class="flex-grow-1">
       <!--
       <b-table
         :data="rows"
