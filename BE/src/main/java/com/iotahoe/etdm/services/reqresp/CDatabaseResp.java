@@ -1,6 +1,6 @@
 package com.iotahoe.etdm.services.reqresp;
 
-import java.util.List;
+import java.util.Map;
 
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +13,5 @@ public class CDatabaseResp {
     String alias;
     String login;
     String url;
-    List<String> errorMessage;
+    Map<String, String> errorMessages;
 }
