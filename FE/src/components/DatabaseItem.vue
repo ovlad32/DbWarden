@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box" ref="box">
     <div class="title">
       <img v-bind:src="iconFile" :title="type" width="32" height="32" />&nbsp;
       <p class="alias">{{alias}}</p>
@@ -10,17 +10,17 @@
       </router-link>
     </div>
     <div class="status">
-      <fa icon="signal" />
+      <fa icon="signal" :title="availableTitle" @click="checkAvailability(id)" />
     </div>
   </div>
 </template>
 <style scoped>
 .box {
+  background-color: ivory;
   display: flex;
   flex-direction: column;
   width: 10rem;
   height: 15rem;
-  background-color: ivory;
   border-style: solid;
   border-width: 2px;
   border-color: lightgray;
@@ -52,9 +52,16 @@
 }
 </style>
 <script>
-import DcApi from "../api/databases";
+//  background-image: url("../assets/db-icons/oracle.svg");
+//  background-position: center;
+//  background-size: cover;
+//  background-repeat: no-repeat;
+
+import DbApi from "../api/databases";
+import { fmt } from "../mixins";
 
 export default {
+  mixins: [fmt],
   props: {
     id: {
       type: Number,
@@ -67,11 +74,26 @@ export default {
     alias: {
       type: String,
       requited: true
+    },
+    whenAvailable: {
+      type: Number,
+      requited: true
     }
+  },
+  mounted() {
+    //this.$ref["box"].style[""]
   },
   computed: {
     iconFile() {
-      return DcApi.getIconFileName(this.type);
+      return DbApi.getIconFileName(this.type);
+    },
+    availableTitle() {
+      return "Last check at " + this.fullDateTime(this.whenAvailable);
+    }
+  },
+  methods: {
+    checkAvailability(id) {
+      DbApi.checkAvailability(id);
     }
   }
 };

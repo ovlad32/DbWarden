@@ -32,30 +32,24 @@
 <style scoped>
 </style>
 <script>
-import DcApi from "../api/databases";
+import { mapState } from "vuex";
+//import DbApi from "../api/databases";
 import DatabaseItem from "./DatabaseItem.vue";
+
 export default {
   components: {
     DatabaseItem
   },
-  data() {
-    return {
-      items: [],
-      paginated: true,
-      paginationSize: 0,
-      perPage: 0,
-      total: 0,
-      showDetailIcon: true
-    };
+  computed: {
+    ...mapState({
+      items: state => state.databases
+    })
+  },
+  methods: {
+    ...mapState(["getAll"])
   },
   mounted() {
-    DcApi.getAll().then(resp => {
-      let data = resp.data;
-      this.items = data.content;
-      this.paginated = true;
-      this.perPage = data.size;
-      this.total = data.totalElements | 0;
-    });
+    this.getAll();
   }
 };
 </script>

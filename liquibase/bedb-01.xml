@@ -24,10 +24,11 @@
             create table if not exists c_database (
                 id bigint not null,
                 type varchar(50),
-                name varchar(50),
+                alias varchar(50),
                 url varchar(2000),
                 login varchar(50),
                 password varchar(50),
+                when_available timestamptz,
                 constraint c_database_pk primary key(id),
                 constraint c_database_fk_type foreign key(type) references r_database_type(type),
                 constraint c_database_nnl__name check(name is not null and name = trim(name))

@@ -2,7 +2,9 @@ package com.iotahoe.etdm.entities;
 
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import javax.persistence.Table;
@@ -24,7 +26,6 @@ public class CDatabase {
     private String url;
     private String login;
     private String password;
-
-    @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentLocalDate")
-    private LocalDate lastAvailable;
+    @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
+    private ZonedDateTime whenAvailable;
 }

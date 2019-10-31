@@ -12,7 +12,9 @@ import com.iotahoe.etdm.services.reqresp.*;
 public interface CDatabaseMapper {
     CDatabaseMapper INSTANCE = Mappers.getMapper(CDatabaseMapper.class);
 
-    @Mappings({ @Mapping(source = "databaseType.type", target = "type") })
+    // , @Mapping(target = "lastAvailable", source = "lastAvailable") , dateFormat =
+    // "dd.MM.yyyy hh:dd"
+    @Mappings({ @Mapping(target = "type", source = "databaseType.type") })
 
     CDatabaseResp toResp(CDatabase database);
 

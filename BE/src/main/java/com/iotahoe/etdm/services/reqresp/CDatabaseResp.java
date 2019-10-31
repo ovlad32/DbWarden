@@ -1,5 +1,6 @@
 package com.iotahoe.etdm.services.reqresp;
 
+import java.time.ZonedDateTime;
 import java.util.Map;
 
 import lombok.AllArgsConstructor;
@@ -17,5 +18,6 @@ public class CDatabaseResp {
     String alias;
     String login;
     String url;
+    ZonedDateTime whenAvailable;
     Map<String, String> errorMessages;
 }
