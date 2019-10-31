@@ -9,7 +9,9 @@
         <a class="icon is-small is-left">123</a>
       </router-link>
     </div>
-    <div class="status"></div>
+    <div class="status">
+      <fa icon="signal" />
+    </div>
   </div>
 </template>
 <style scoped>
