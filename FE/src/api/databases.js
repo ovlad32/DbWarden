@@ -15,6 +15,15 @@ export default {
       throw new Error("Could not retrieve database configurations: " + e);
     });
   },
+  checkAvailability(id) {
+    return api({
+      method: "POST",
+      url: "databases/check",
+      data: { id }
+    }).catch(e => {
+      throw new Error("Could not check database availability: " + e);
+    });
+  },
 
   getIconFileName(dbType) {
     var iconfile = "";

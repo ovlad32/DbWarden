@@ -25,7 +25,7 @@
       </b-table>
             
       -->
-      <database-item v-for="item in items" v-bind:key="item.id" v-bind:id="item.id" />
+      <database-item v-for="item in items" v-bind:key="item.id" v-bind="item" />
     </div>
   </div>
 </template>

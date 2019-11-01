@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CDatabaseResp {
-    Integer id;
+    Long id;
     String type;
     String alias;
     String login;

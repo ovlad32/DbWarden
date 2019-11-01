@@ -2,6 +2,7 @@
   <div class="container d-flex flex-column w-100">
     <nav-bar />
     <router-view></router-view>
+    <status-bar />
   </div>
 </template>
 <style scoped>
@@ -17,6 +18,7 @@
 //import databaseConfigDetail from "./components/DatabaseConfigDetail.vue";
 //import databaseConfigTable from "./components/DatabaseConfigTable.vue";
 import navBar from "./components/NavBar.vue";
+import statusBar from "./components/StatusBar.vue";
 //import databaseTypes from "./data/databaseTypes.js";
 import store from "./store/index";
 
@@ -27,7 +29,8 @@ export default {
     //"database-config": databaseConfig,
     //"database-config-table": databaseConfigTable,
     //databaseConfigDetail,
-    "nav-bar": navBar
+    "nav-bar": navBar,
+    "status-bar": statusBar
     //   appSidebar: Sidebar,
     //  appContent: Content
   },

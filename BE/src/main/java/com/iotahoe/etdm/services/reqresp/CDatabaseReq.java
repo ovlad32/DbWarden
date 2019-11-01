@@ -5,7 +5,7 @@ import com.iotahoe.etdm.services.*;
 
 @Data
 public class CDatabaseReq implements IDatabaseReq {
-    Integer id;
+    Long id;
     String type;
     String alias;
     String login;

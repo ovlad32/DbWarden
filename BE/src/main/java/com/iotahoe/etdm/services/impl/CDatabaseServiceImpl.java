@@ -12,6 +12,7 @@ import java.util.Properties;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import com.iotahoe.etdm.entities.CDatabase;
 import com.iotahoe.etdm.entities.RDatabaseType;
 import com.iotahoe.etdm.repositories.CDatabaseRepository;
 import com.iotahoe.etdm.repositories.RDatabaseTypeRepository;
@@ -95,26 +96,41 @@ public class CDatabaseServiceImpl implements CDatabaseService {
 
     @Override
     public CDatabaseResp checkConnection(IDatabaseReq req) {
-        CDatabaseResp resp = CDatabaseResp.builder().errorMessages(Collections.emptyMap()).build();
-        Map<String, String> messages = validateRequest(req);
+        Map<String, String> messages = new HashMap<>();
+        CDatabaseResp resp = CDatabaseResp.builder().errorMessages(messages).build();
+        if (req.getId() != null) {
+            CDatabase entity = databaseRepository.getOne(req.getId());
+            if (req.getLogin() != null)
+                entity.setLogin(req.getLogin());
+            if (req.getPassword() != null)
+                entity.setLogin(req.getPassword());
+            if (req.getUrl() != null)
+                entity.setLogin(req.getUrl());
+            req = entity;
+        } else {
+            messages.putAll(validateRequest(req));
+        }
+
         if (!messages.isEmpty()) {
             resp.getErrorMessages().putAll(messages);
             return resp;
         }
+
         DataSource ds = null;
         try {
             ds = buildDataSource(req);
-        } catch (RuntimeException e) {
+        } catch (Throwable e) {
             resp.getErrorMessages().put("*", e.getMessage());
             return resp;
         }
+
         try (Connection conn = ds.getConnection()) {
             try {
                 conn.rollback();
             } catch (Throwable e) {
             }
 
-        } catch (SQLException e) {
+        } catch (Throwable e) {
             resp.getErrorMessages().put("*", e.getMessage());
             return resp;
         }
