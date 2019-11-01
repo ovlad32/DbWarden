@@ -1,8 +1,8 @@
 <template>
   <div class="box" ref="box">
     <div class="title">
-      <img v-bind:src="iconFile" :title="type" width="32" height="32" />&nbsp;
-      <p class="alias">{{alias}}</p>
+      <img v-bind:src="iconFile" :title="item.type" width="32" height="32" />&nbsp;
+      <p class="alias">{{item.alias}}</p>
     </div>
     <div class="dashboard">
       <router-link :to="{name:'database-edit',params:{id}}">
@@ -59,6 +59,7 @@
 
 import DbApi from "../api/databases";
 import { fmt } from "../mixins";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   mixins: [fmt],
@@ -66,7 +67,18 @@ export default {
     id: {
       type: Number,
       requited: true
-    },
+    }
+  },
+  data() {
+    return {
+      item: {
+        type: null,
+        alias: null,
+        whenAvailable: null
+      }
+    };
+  },
+  /*,
     type: {
       type: String,
       requited: true
@@ -78,23 +90,26 @@ export default {
     whenAvailable: {
       type: Number,
       requited: true
-    }
-  },
+    }*/
+
   mounted() {
     //this.$ref["box"].style[""]
+    this.item = this.findById(this.id);
   },
   computed: {
     iconFile() {
-      return DbApi.getIconFileName(this.type);
+      return DbApi.getIconFileName(this.item.type);
     },
     availableTitle() {
-      return "Last check at " + this.fullDateTime(this.whenAvailable);
-    }
+      return "Last check at " + this.fullDateTime(this.item.whenAvailable);
+    },
+    ...mapGetters("mDatabases", ["findById"])
   },
   methods: {
     checkAvailability(id) {
       DbApi.checkAvailability(id);
-    }
+    },
+    ...mapActions("mDatabases", ["fetchById"])
   }
 };
 </script>

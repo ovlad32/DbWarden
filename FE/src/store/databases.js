@@ -2,19 +2,23 @@ import api from "../api/databases";
 
 const state = {
   types: [],
-  databases: []
+  items: []
 };
 
-const getters = {};
+const getters = {
+  findById: state => id => {
+    return state.items.find(item => item.id == id);
+  }
+};
 const actions = {
-  getTypes({ commit }) {
+  fetchTypes({ commit }) {
     api.getTypes().then(r => commit("putDbTypes", r.data));
   },
-  getAll({ commit }, filters) {
-    api.getAll(filters).then(r => commit("putDbs", r.data));
+  fetchAll({ commit }, filters) {
+    api.getAll(filters).then(r => commit("putDbs", r.data.content));
   },
-  getById({ commit }, id) {
-    api.getAll({ id: id }).then(r => commit("putDb", r.data));
+  fetchById({ commit }, id) {
+    api.getAll({ id: id }).then(r => commit("putDb", r.data.content));
   }
 };
 
@@ -22,14 +26,14 @@ const mutations = {
   putDbTypes(state, data) {
     state.types = data;
   },
-  putDbs(store, data) {
-    store.databases = data;
+  putDbs(state, data) {
+    state.items = data;
   },
-  putDb(store, data) {
+  putDb(state, data) {
     if (data.id) {
-      let index = store.databases.findIndex(e => e.id === data.id);
+      let index = state.items.findIndex(e => e.id === data.id);
       if (index > 0) {
-        store.databases[index] = data;
+        state.items[index] = data;
       }
     }
   }

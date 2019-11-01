@@ -25,15 +25,14 @@
       </b-table>
             
       -->
-      <database-item v-for="item in items" v-bind:key="item.id" v-bind="item" />
+      <database-item v-for="item in items" v-bind:key="item.id" v-bind:id="item.id" />
     </div>
   </div>
 </template>
 <style scoped>
 </style>
 <script>
-import { mapState } from "vuex";
-//import DbApi from "../api/databases";
+import { mapState, mapActions } from "vuex";
 import DatabaseItem from "./DatabaseItem.vue";
 
 export default {
@@ -42,14 +41,14 @@ export default {
   },
   computed: {
     ...mapState({
-      items: state => state.databases
+      items: state => state.mDatabases.items
     })
   },
   methods: {
-    ...mapState(["getAll"])
+    ...mapActions("mDatabases", ["fetchAll"])
   },
   mounted() {
-    this.getAll();
+    this.fetchAll();
   }
 };
 </script>
