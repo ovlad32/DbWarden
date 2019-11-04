@@ -1,19 +1,31 @@
 <template>
+  <div class="dbedit">
+    <p class="db-title">New Database Server</p>
+
+    <form class="databaseConfig" style="background:lightyellow">
+      <div class="form-group row">
+        <label for="typeFormId" class="col-sm-2 col-form-label">Type</label>
+        <div class="mr-auto">
+          <select id="typeFormId" class="form-control" v-model="item.type">
+            <option v-for="d in types" :key="d.type" :value="d.type" :label="d.name" />
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--  
   <section class="section columns">
     <form class="databaseConfig column is-5 is-offset-1" style="background:lightyellow">
       <div class="container">
-        <p class="db-title">New Database Server</p>
         <div class="field is-horizontal">
           <div class="field-label is-normal">
-            <label for="typeFormId" class="label">Type</label>
+            
           </div>
           <div class="field-body">
             <div class="field">
               <p class="control is-expanded has-icons-left">
                 <span class="select">
-                  <select id="typeFormId" class="select" v-model="item.type">
-                    <option v-for="d in types" :key="d.type" :value="d.type" :label="d.name" />
-                  </select>
+               
                 </span>
                 <span class="icon is-small is-left">
                   <fa icon="folder" />
@@ -123,6 +135,7 @@
       </div>
     </form>
   </section>
+  -->
 </template>
 
 <style>
@@ -145,7 +158,7 @@
 import dcAPI from "../api/databases";
 export default {
   props: {
-    id: { type: Number }
+    id: { type: [Number, String] }
   },
   data() {
     return {
