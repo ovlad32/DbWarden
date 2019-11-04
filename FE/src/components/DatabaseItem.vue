@@ -60,6 +60,7 @@
 import DbApi from "../api/databases";
 import { fmt } from "../mixins";
 import { mapActions } from "vuex";
+import { eventBus } from "../eventBus";
 
 export default {
   mixins: [fmt],
@@ -97,19 +98,18 @@ export default {
   methods: {
     checkAvailability(id) {
       DbApi.checkAvailability(id).then(r => {
-        //console.log(r.data.errorMessages);
         if (r.data.errorMessages && r.data.errorMessages !== null) {
-          r.data.errorMessages;
-          let allMessages = "";
-          Object.values().forEach(e => {
-            this.$emit.allMessages = allMessages + e;
+          Object.entries(r.data.errorMessages).forEach(([key, val]) => {
+            eventBus.$emit("error", { key: key, message: val });
+            //            this.error(val, key);
           });
         } else {
           this.fetchById(id);
         }
       });
     },
-    ...mapActions("mDatabases", ["fetchById"])
+    ...mapActions("mDatabases", ["fetchById"]),
+    ...mapActions("mMessages", ["error"])
   }
 };
 </script>

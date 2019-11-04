@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column flex-grow-1 overflow-y-scroll">
-    <router-link :to="{name:'database-new'}" class="ml-auto my-2 button is-primary">New Database</router-link>
+    <router-link :to="{name:'database-new'}" class="ml-auto my-2 btn btn-primary">New Database</router-link>
 
     <div class="flex-grow-1">
       <!--

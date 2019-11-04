@@ -25,10 +25,22 @@
           <a href="#" class="nav-link">Processing</a>
         </router-link>
       </ul>
+      <a href="#" class="p-1 m-2 border bg-white">{{messageCount}}</a>
       <form class="form-inline my-2">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
   </nav>
 </template>
+<script>
+//v-if="messageCount > 0"
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters({
+      messageCount: "mMessages/getErrorCount"
+    })
+  }
+};
+</script>
