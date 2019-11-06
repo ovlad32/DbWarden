@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 public class XKeyColumn {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "appSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appId")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,11 +25,8 @@ public class XKeyColumn {
     @Column(name = "column_id")
     private XTableColumn column;
 
-
     private String refColumnName;
 
-
     private Integer position;
-
 
 }

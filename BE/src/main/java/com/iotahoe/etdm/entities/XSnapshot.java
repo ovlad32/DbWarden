@@ -15,11 +15,11 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(schema = "dw", name = "x_snapshot")
+@Table(schema = "dbw", name = "x_snapshot")
 public class XSnapshot {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appId")
 
     private Long id;
 

@@ -5,7 +5,7 @@
     <changeSet id="initial" author="V">
         <sql><![CDATA[
 
-            create sequence if not exists app_id;
+            create sequence if not exists app_id increment by 10;
 
             create table if not exists r_database_type(
                type varchar(50) not null,
@@ -37,6 +37,7 @@
             create table if not exists x_snapshot(
                 id bigint not null,
                 db_id  bigint,
+                label varchar(255),
                 taken timestamp,
                 constraint x_snapshot_pk primary key(id),
                 constraint x_snapshot_fk_db foreign key(db_id) references c_database(id),
@@ -68,8 +69,10 @@
                 tb_id bigint,
                 ss_id bigint,
                 name varchar(2000),
+                position integer,
                 unique_count bigint,
                 empty_count bigint,
+                jdbc_int_type integer,
                 constraint x_table_column_pk primary key(id),
                 constraint x_table_column_fk_db foreign key(db_id) references c_database(id),
                 constraint x_table_column_fk_ss foreign key(ss_id) references x_snapshot(id),
@@ -103,6 +106,7 @@ values (1,'ORACLE','Oracle AWS','jdbc:oracle:thin:@oracle.aws.io-tahoe.com:1521:
     </changeSet>
     <changeSet id="initial-grant" author="V">
         <sql><![CDATA[
+        grant select on sequence dbw.app_id to dbwa;
         grant select,insert,update on r_database_type to dbwa;
         grant select,insert,update on c_database to dbwa;
         grant select,insert,update on x_snapshot to dbwa;

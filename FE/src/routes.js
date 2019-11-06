@@ -2,7 +2,7 @@ import DatabaseList from "./components/DatabaseList.vue";
 import DatabaseEdit from "./components/DatabaseEdit.vue";
 
 const routes = [
-  { path: "/", redirect: "/databases" },
+  { title: "Database watcher - Home", path: "/", redirect: "/databases" },
   {
     name: "databases",
     path: "/databases",

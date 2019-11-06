@@ -5,11 +5,11 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(schema = "dw", name = "x_table")
+@Table(schema = "dbw", name = "x_table")
 @Data
 public class XTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appId")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

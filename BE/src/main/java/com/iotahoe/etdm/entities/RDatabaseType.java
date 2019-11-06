@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "r_database_type")
+@Table(schema = "dbw", name = "r_database_type")
 @Data
 public class RDatabaseType {
     @Id

@@ -8,19 +8,19 @@ import javax.persistence.*;
 @Data
 public class XKey {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "appSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appId")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Column(name = "ss_id")
     private XSnapshot snapshot;
 
-    @Column(name ="db_id")
+    @Column(name = "db_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private CDatabase db;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name="table_id")
+    @Column(name = "table_id")
     private XTable table;
 
     private String keyName;
