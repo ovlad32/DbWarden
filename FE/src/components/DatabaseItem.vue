@@ -1,54 +1,67 @@
 <template>
   <div class="box" ref="box">
-    <div class="title">
-      <img v-bind:src="iconFile" :title="type" width="32" height="32" />&nbsp;
-      <p class="alias">{{alias}}</p>
-    </div>
-    <div class="dashboard">
-      <router-link :to="{name:'database-edit',params:{id}}">
-        <a class="icon is-small is-left">123</a>
+    <ul class="border-bottom mb-1">
+      <li class="d-inline-block">
+        <img v-bind:src="iconFile" width="32px" height="32px" />
+      </li>
+      <li class="d-inline-block">
+        <span class="pl-1 db-type">{{type}}</span>
+      </li>
+    </ul>
+    <ul class="alias-section">
+      <li class="icon">
+        <fa icon="signal" :title="availableTitle" @click="checkAvailability(id)" />
+      </li>
+      <router-link class="alias" tag="li" :to="{name:'database-edit',params:{id}}">
+        <a ref="#">{{alias}}</a>
       </router-link>
-    </div>
-    <div class="status">
-      <fa icon="signal" :title="availableTitle" @click="checkAvailability(id)" />
-    </div>
+    </ul>
+
+    <!--
+            <li class="status">
+        <fa icon="signal" :title="availableTitle" @click="checkAvailability(id)" />
+      </li>
+    -->
   </div>
 </template>
 <style scoped>
 .box {
+  display: inline-block;
   background-color: ivory;
-  display: flex;
-  flex-direction: column;
   width: 10rem;
   height: 15rem;
   border-style: solid;
   border-width: 2px;
-  border-color: lightgray;
-  border-radius: 10%;
-  padding: 0.8rem;
+  border-color: lightgrey;
+  border-radius: 2%;
+  padding: 0.5rem;
 }
 .box:hover {
   border-style: outset;
 }
-.title {
-  display: flex;
-  border-bottom: 1px solid lightgray;
-  padding-bottom: 0.5rem;
-}
-.title img {
-  display: inline;
-}
-
-.title .alias {
-  align-self: center;
-  flex-grow: 1;
+.db-type {
+  padding-left: 0.3rem;
   white-space: nowrap;
   font-size: 0.8rem;
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.dashboard {
+
+.alias,
+.alias a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.75rem;
+  background-color: aqua;
+}
+
+.alias-section li {
+  display: inline-block;
+}
+.alias-section .icon {
+  background-color: blueviolet;
 }
 </style>
 <script>
