@@ -1,20 +1,31 @@
 <template>
-  <div class="box" ref="box">
-    <ul class="border-bottom mb-1">
+  <div class="app-box d-inline-block border border-solid p-2" ref="box">
+    <ul class="border-bottom mb-1 text-nowrap">
       <li class="d-inline-block">
-        <img v-bind:src="iconFile" width="32px" height="32px" />
+        <img class="logo" v-bind:src="iconFile" />
       </li>
-      <li class="d-inline-block">
-        <span class="pl-1 db-type">{{type}}</span>
-      </li>
+      <li
+        style="width: calc(100% - 32px);"
+        class="d-inline-block pl-1 align-middle font-weight-bold text-truncate"
+      >{{type}}</li>
     </ul>
-    <ul class="alias-section">
-      <li class="icon">
+    <ul class="text-nowrap">
+      <li class="d-inline-block">
         <fa icon="signal" :title="availableTitle" @click="checkAvailability(id)" />
       </li>
-      <router-link class="alias" tag="li" :to="{name:'database-edit',params:{id}}">
-        <a ref="#">{{alias}}</a>
+      <router-link
+        style="width: calc(100% - 1rem);"
+        class="d-inline-block pl-1 text-truncate"
+        t2ag="li"
+        :to="{name:'database-edit',params:{id}}"
+      >
+        <a href="#">{{alias}} {{alias}}</a>
       </router-link>
+    </ul>
+
+    <ul>
+      <li></li>
+      <li></li>
     </ul>
 
     <!--
@@ -25,43 +36,29 @@
   </div>
 </template>
 <style scoped>
-.box {
-  display: inline-block;
-  background-color: ivory;
-  width: 10rem;
-  height: 15rem;
-  border-style: solid;
-  border-width: 2px;
-  border-color: lightgrey;
-  border-radius: 2%;
-  padding: 0.5rem;
+.logo {
+  width: var(--logo-width);
+  height: var(--logo-width);
 }
-.box:hover {
+.app-box {
+  --logo-width: 32px;
+  height: 15rem;
+  width: 10rem;
+  background-color: ivory;
+  border-radius: 1% !important;
+  border-width: 2px !important;
+  border-color: lightgrey;
+}
+.app-box:hover {
   border-style: outset;
 }
-.db-type {
-  padding-left: 0.3rem;
-  white-space: nowrap;
-  font-size: 0.8rem;
-  font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.app-box li {
+  vertical-align: middle;
 }
-
-.alias,
-.alias a {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.app-box a {
+  text-decoration: none;
   font-size: 0.75rem;
-  background-color: aqua;
-}
-
-.alias-section li {
-  display: inline-block;
-}
-.alias-section .icon {
-  background-color: blueviolet;
+  vertical-align: middle;
 }
 </style>
 <script>
