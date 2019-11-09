@@ -1,54 +1,64 @@
 <template>
-  <div class="box" ref="box">
-    <div class="title">
-      <img v-bind:src="iconFile" :title="type" width="32" height="32" />&nbsp;
-      <p class="alias">{{alias}}</p>
-    </div>
-    <div class="dashboard">
-      <router-link :to="{name:'database-edit',params:{id}}">
-        <a class="icon is-small is-left">123</a>
+  <div class="app-box d-inline-block border border-solid p-2" ref="box">
+    <ul class="border-bottom mb-1 text-nowrap">
+      <li class="d-inline-block">
+        <img class="logo" v-bind:src="iconFile" />
+      </li>
+      <li
+        style="width: calc(100% - 32px);"
+        class="d-inline-block pl-1 align-middle font-weight-bold text-truncate"
+      >{{type}}</li>
+    </ul>
+    <ul class="text-nowrap">
+      <li class="d-inline-block">
+        <fa icon="signal" :title="availableTitle" @click="checkAvailability(id)" />
+      </li>
+      <router-link
+        style="width: calc(100% - 1rem);"
+        class="d-inline-block pl-1 text-truncate"
+        t2ag="li"
+        :to="{name:'database-edit',params:{id}}"
+      >
+        <a href="#">{{alias}} {{alias}}</a>
       </router-link>
-    </div>
-    <div class="status">
-      <fa icon="signal" :title="availableTitle" @click="checkAvailability(id)" />
-    </div>
+    </ul>
+
+    <ul>
+      <li></li>
+      <li></li>
+    </ul>
+
+    <!--
+            <li class="status">
+        <fa icon="signal" :title="availableTitle" @click="checkAvailability(id)" />
+      </li>
+    -->
   </div>
 </template>
 <style scoped>
-.box {
-  background-color: ivory;
-  display: flex;
-  flex-direction: column;
-  width: 10rem;
-  height: 15rem;
-  border-style: solid;
-  border-width: 2px;
-  border-color: lightgray;
-  border-radius: 10%;
-  padding: 0.8rem;
+.logo {
+  width: var(--logo-width);
+  height: var(--logo-width);
 }
-.box:hover {
+.app-box {
+  --logo-width: 32px;
+  height: 15rem;
+  width: 10rem;
+  background-color: ivory;
+  border-radius: 1% !important;
+  border-width: 2px !important;
+  border-color: lightgrey;
+}
+.app-box:hover {
   border-style: outset;
 }
-.title {
-  display: flex;
-  border-bottom: 1px solid lightgray;
-  padding-bottom: 0.5rem;
+.app-box li {
+  vertical-align: middle;
 }
-.title img {
-  display: inline;
-}
-
-.title .alias {
-  align-self: center;
-  flex-grow: 1;
-  white-space: nowrap;
-  font-size: 0.8rem;
-  font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.dashboard {
+.app-box a {
+  text-decoration: none;
+  font-size: 0.75rem;
+  vertical-align: middle;
 }
 </style>
 <script>
