@@ -2,18 +2,36 @@
   <div class="dbedit">
     <p class="db-title">New Database Server</p>
 
-    <form class="databaseConfig" style="background:lightyellow">
-      <div class="form-group row">
-        <label for="typeFormId" class="col-sm-2 col-form-label">Type</label>
+    <b-form class="databaseConfig" style="background:lightyellow">
+      <b-form-group label="Type" label-for="typeFormId">
+        <b-form-select
+          id="typeFormId"
+          v-model="item.type"
+          :options="types"
+          value-field="type"
+          text-field="name"
+        ></b-form-select>
+      </b-form-group>
+    </b-form>
+  </div>
+  <!--  
+
+       class="form-group row">
+        <label for="typeFormId" class="col-sm-2 col-form-label"></label>
         <div class="mr-auto">
-          <select id="typeFormId" class="form-control" v-model="item.type">
+          <select id="typeFormId" class="form-control" v-model="">
             <option v-for="d in types" :key="d.type" :value="d.type" :label="d.name" />
           </select>
         </div>
       </div>
+      <div class="form-group row">
+        <label for="urlFormId" class="label">URI</label>
+        <div class="mr-auto">
+          <input v-model="item.url" id="urlFormId" class="input" type="text" placeholder size="50" />
+        </div>
+      </div>
     </form>
   </div>
-  <!--  
   <section class="section columns">
     <form class="databaseConfig column is-5 is-offset-1" style="background:lightyellow">
       <div class="container">
@@ -177,6 +195,13 @@ export default {
   mounted() {
     dcAPI.getTypes().then(r => {
       this.types = r.data;
+      /*.map(e => {
+        return;
+        {
+          text: e.name;
+          value: e.type;
+        }
+      });*/
     });
     if (this.id) {
       dcAPI.getAll({ id: this.id }).then(r =>
