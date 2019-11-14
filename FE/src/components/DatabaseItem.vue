@@ -2,7 +2,7 @@
   <div class="app-box d-inline-block border border-solid p-2" ref="box">
     <ul class="border-bottom mb-1 text-nowrap">
       <li class="d-inline-block">
-        <img class="logo" v-bind:src="iconFile" />
+        <img class="vendor-logo" v-bind:src="iconFile" />
       </li>
       <li
         style="width: calc(100% - 32px);"
@@ -36,14 +36,14 @@
   </div>
 </template>
 <style scoped>
-.logo {
+.vendor-logo {
   width: var(--logo-width);
   height: var(--logo-width);
 }
 .app-box {
   --logo-width: 32px;
-  height: 15rem;
-  width: 10rem;
+  height: 3.2rem;
+  width: 18rem;
   background-color: ivory;
   border-radius: 1% !important;
   border-width: 2px !important;
@@ -90,6 +90,10 @@ export default {
     whenAvailable: {
       type: Number,
       requited: true
+    },
+    available: {
+      type: Boolean,
+      required: true
     }
   },
 
