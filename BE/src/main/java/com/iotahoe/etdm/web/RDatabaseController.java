@@ -4,10 +4,11 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.iotahoe.etdm.entities.CDatabase;
 import com.iotahoe.etdm.services.CDatabaseService;
 import com.iotahoe.etdm.services.RDatabaseTypeService;
-import com.iotahoe.etdm.services.reqresp.*;
+import com.iotahoe.etdm.services.reqresp.CDatabaseReq;
+import com.iotahoe.etdm.services.reqresp.CDatabaseResp;
+import com.iotahoe.etdm.services.reqresp.IdReq;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,17 +40,29 @@ public class RDatabaseController {
         return ResponseEntity.ok(databaseTypeService.getAll());
     }
 
-    @RequestMapping(value = "all")
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public Page<CDatabaseResp> getsAll(@PageableDefault Pageable pageable,
             @RequestBody(required = false) Map<String, String> filters) {
         return databaseService.all(pageable, filters);
     }
 
-    @RequestMapping(value = "check", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> checkConnection(@RequestBody(required = true) CDatabaseReq req) {
-        return ResponseEntity.ok(databaseService.checkConnection(req));
+    public ResponseEntity<?> save(@RequestBody(required = true) CDatabaseReq req) {
+        return ResponseEntity.ok(databaseService.save(req));
+    }
+
+    @RequestMapping(value = "available", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> checkAvailability(@RequestBody(required = true) IdReq req) {
+        return ResponseEntity.ok(databaseService.checkAvailability(req));
+    }
+
+    @RequestMapping(value = "test", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> testConnection(@RequestBody(required = true) CDatabaseReq req) {
+        return ResponseEntity.ok(databaseService.testConnection(req));
     }
 
 }

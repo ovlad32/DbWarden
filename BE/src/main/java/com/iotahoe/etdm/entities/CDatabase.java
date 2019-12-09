@@ -3,6 +3,7 @@ package com.iotahoe.etdm.entities;
 import lombok.Data;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.persistence.Table;
@@ -28,6 +29,9 @@ public class CDatabase implements IDatabaseReq {
     private String password;
     @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
     private ZonedDateTime whenAvailable;
+    private String status;
+    @OneToMany
+    private List<CDatabaseTableType> jdbcTableTypes;
 
     @Override
     public String getType() {
@@ -35,5 +39,9 @@ public class CDatabase implements IDatabaseReq {
             return this.databaseType.getType();
         }
         return null;
+    }
+
+    public static enum Status {
+        AVAILABLE, UNKNOWN, DEAD
     }
 }

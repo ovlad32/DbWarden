@@ -9,7 +9,7 @@ export default {
   getAll(filters) {
     return api({
       method: "GET",
-      url: "databases/all",
+      url: "databases",
       params: filters
     }).catch(e => {
       throw new Error("Could not retrieve database configurations: " + e);
@@ -24,7 +24,20 @@ export default {
       throw new Error("Could not check database availability: " + e);
     });
   },
-
+  checkParams(item) {
+    return api({
+      method: "POST",
+      url: "databases/test",
+      data: item
+    });
+  },
+  save(item) {
+    return api({
+      method: "POST",
+      url: "databases",
+      data: item
+    });
+  },
   getIconFileName(dbType) {
     var iconfile = "";
     switch (dbType) {

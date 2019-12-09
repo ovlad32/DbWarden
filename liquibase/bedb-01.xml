@@ -5,7 +5,7 @@
     <changeSet id="initial" author="V">
         <sql><![CDATA[
 
-            create sequence if not exists app_id increment by 10;
+            create sequence if not exists app_id increment by 50;
 
             create table if not exists r_database_type(
                type varchar(50) not null,
@@ -19,6 +19,7 @@
                constraint r_database_type_nnl__realm check(realm is not null and realm = trim(realm)),
                constraint r_database_type_nnl__i_order check(i_order is not null)
                );
+            
 
 
             create table if not exists c_database (
@@ -31,8 +32,19 @@
                 when_available timestamptz,
                 constraint c_database_pk primary key(id),
                 constraint c_database_fk_type foreign key(type) references r_database_type(type),
-                constraint c_database_nnl__name check(name is not null and name = trim(name))
+                constraint c_database_nnl__alias check(alias is not null and alias = trim(alias))
                 );
+
+            create table if not exists c_database_table_types(
+                id bigint not null,
+                db_id bigint,
+                jdbc_table_type text,
+                constraint c_database_table_type_pk primary key(id),
+                constraint c_database_table_type_fk_db foreign key(db_id) references c_database(id),
+                constraint c_database_type_nnl__db_id check(db_id is not null),
+                constraint c_database_type_nnl__jdbc_table_type check(jdbc_table_type is not null and jdbc_table_type = trim(jdbc_table_type))
+            );
+
 
             create table if not exists x_snapshot(
                 id bigint not null,

@@ -14,6 +14,7 @@ public abstract class CDatabase_ {
 	public static volatile SingularAttribute<CDatabase, Long> Id;
 	public static volatile SingularAttribute<CDatabase, String> login;
 	public static volatile SingularAttribute<CDatabase, String> url;
+	public static volatile SingularAttribute<CDatabase, String> status;
 
 	public static final String DATABASE_TYPE = "databaseType";
 	public static final String PASSWORD = "password";
@@ -21,5 +22,6 @@ public abstract class CDatabase_ {
 	public static final String ID = "Id";
 	public static final String LOGIN = "login";
 	public static final String URL = "url";
+	public static final String STATUS = "status";
 
 }

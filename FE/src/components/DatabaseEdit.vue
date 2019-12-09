@@ -1,179 +1,50 @@
 <template>
   <div class="dbedit">
-    <p class="db-title">New Database Server</p>
+    <p class="db-title">New Database Server Details</p>
 
-    <b-form class="databaseConfig" style="background:lightyellow">
-      <b-form-group label="Type" label-for="typeFormId">
+    <b-form class="databaseConfig" style="background:lightyellow" @submit.stop.prevent novalidate>
+      <b-form-group label="Type:" label-for="typeFormId">
         <b-form-select
-          id="typeFormId"
+          id="type"
           v-model="item.type"
           :options="types"
           value-field="type"
           text-field="name"
-        ></b-form-select>
+          :state="isTypeOk"
+        >
+          <b-form-invalid-feedback :state="isTypeOk">Select database type</b-form-invalid-feedback>
+        </b-form-select>
       </b-form-group>
+      <b-form-group label="Alias:">
+        <b-input id="alias" v-model="item.alias" required :state="isAliasOk" />
+        <b-form-invalid-feedback :state="isAliasOk">Provide an meaningful name for the database</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group label="URI:">
+        <b-input id="uri" v-model="item.uri" required :state="isUriOk" />
+        <b-form-invalid-feedback :state="isUriOk">Provide the URI of the database</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group label="Login:">
+        <b-input id="login" v-model="item.login" />
+      </b-form-group>
+      <b-form-group label="password:">
+        <b-input type="password" id="password" v-model="item.password" autocomplete="new-password" />
+      </b-form-group>
+      <b-button-group>
+        <b-button type="summit" variant="primary" @click="save()">Save</b-button>
+        <b-button class="ml-1" variant="secondary" @click="checkParams()">Test connection</b-button>
+        <b-button class="ml-1" type="reset" variant="secondary">Cancel</b-button>
+      </b-button-group>
     </b-form>
   </div>
-  <!--  
-
-       class="form-group row">
-        <label for="typeFormId" class="col-sm-2 col-form-label"></label>
-        <div class="mr-auto">
-          <select id="typeFormId" class="form-control" v-model="">
-            <option v-for="d in types" :key="d.type" :value="d.type" :label="d.name" />
-          </select>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="urlFormId" class="label">URI</label>
-        <div class="mr-auto">
-          <input v-model="item.url" id="urlFormId" class="input" type="text" placeholder size="50" />
-        </div>
-      </div>
-    </form>
-  </div>
-  <section class="section columns">
-    <form class="databaseConfig column is-5 is-offset-1" style="background:lightyellow">
-      <div class="container">
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <p class="control is-expanded has-icons-left">
-                <span class="select">
-               
-                </span>
-                <span class="icon is-small is-left">
-                  <fa icon="folder" />
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label for="urlFormId" class="label">URI</label>
-          </div>
-          <div class="field-body">
-            <p class="control is-expanded has-icons-left">
-              <input
-                v-model="item.url"
-                id="urlFormId"
-                class="input"
-                type="text"
-                placeholder
-                size="50"
-              />
-              <span class="icon is-small is-left">
-                <fa icon="server" />
-              </span>
-            </p>
-          </div>
-        </div>
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label for="aliasFormId" class="label">Alias</label>
-          </div>
-          <div class="field-body">
-            <p class="control is-expanded has-icons-left">
-              <input
-                v-model="item.alias"
-                class="input"
-                id="aliasFormId"
-                type="text"
-                placeholder
-                size="50"
-              />
-              <span class="icon is-small is-left">
-                <fa icon="database" />
-              </span>
-            </p>
-          </div>
-        </div>
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label for="loginFormId" class="label">Login</label>
-          </div>
-          <div class="field-body">
-            <p class="control is-expanded has-icons-left">
-              <input
-                v-model="item.login"
-                class="input"
-                id="loginFormId"
-                type="text"
-                placeholder
-                size="50"
-              />
-              <span class="icon is-small is-left">
-                <fa icon="database" />
-              </span>
-            </p>
-          </div>
-        </div>
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label for="passwordFormId" class="label">Password</label>
-          </div>
-          <div class="field-body">
-            <p class="control is-expanded has-icons-left">
-              <input
-                class="input"
-                v-model="item.password"
-                id="passwordFormId"
-                type="password"
-                placeholder
-                size="50"
-                autocomplete="new-password"
-              />
-              <span class="icon is-small is-left">
-                <fa icon="database" />
-              </span>
-            </p>
-          </div>
-        </div>
-        <div class="field is-horizontal db-button-group">
-          <div class="field-label"></div>
-          <div class="field-body">
-            <div class="field is-grouped is-grouped-right">
-              <span class="control">
-                <button
-                  class="button is-primary"
-                  type="submit"
-                  @click.prevent="save"
-                >Create DataSource</button>
-              </span>
-              <span class="control">
-                <a class="button is-light">Close</a>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
-  </section>
-  -->
 </template>
 
 <style>
-.db-button-group {
-  padding-top: 0.5em;
-}
-.db-title {
-  font-size: 2em;
-  padding-bottom: 0.5em;
-}
-.dialog {
-  display: flex;
-  background: blueviolet;
-}
 </style>
 
 
 <script>
 //import { mapState, mapActions } from "vuex";
-import dcAPI from "../api/databases";
+import DbApi from "../api/databases";
 export default {
   props: {
     id: { type: [Number, String] }
@@ -186,25 +57,30 @@ export default {
   },
   methods: {
     save() {
-      dcAPI.save(this.item);
+      DbApi.save(this.item);
     },
     checkParams() {
-      dcAPI.checkParams(this.item);
+      DbApi.checkParams(this.item);
     }
   },
+  computed: {
+    isTypeOk() {
+      return "type" in this.item;
+    },
+    isAliasOk() {
+      return "alias" in this.item && this.item.alias.trim().length > 0;
+    },
+    isUriOk() {
+      return "uri" in this.item && this.item.uri.trim().length > 0;
+    }
+  },
+
   mounted() {
-    dcAPI.getTypes().then(r => {
+    DbApi.getTypes().then(r => {
       this.types = r.data;
-      /*.map(e => {
-        return;
-        {
-          text: e.name;
-          value: e.type;
-        }
-      });*/
     });
     if (this.id) {
-      dcAPI.getAll({ id: this.id }).then(r =>
+      DbApi.getAll({ id: this.id }).then(r =>
         r.data.content.forEach(item => {
           this.item = item;
         })
