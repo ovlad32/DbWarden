@@ -29,8 +29,10 @@ public class CDatabase implements IDatabaseReq {
     private String password;
     @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
     private ZonedDateTime whenAvailable;
+    // @Type(type = "java.lang.String")
     private String status;
-    @OneToMany
+
+    @OneToMany(mappedBy = "database")
     private List<CDatabaseTableType> jdbcTableTypes;
 
     @Override

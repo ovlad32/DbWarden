@@ -7,12 +7,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class AppWebMvcConfigurer implements WebMvcConfigurer {
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        // to serve static .html pages...
-        registry.addResourceHandler("/swagger/**").addResourceLocations("/resources/public/swagger/");
-    }
+    /**
+     * @Override public void addResourceHandlers(ResourceHandlerRegistry registry) {
+     *           //
+     *           registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+     *           // to serve static .html pages...
+     *           registry.addResourceHandler("/swagger/**").addResourceLocations("/resources/public/swagger/");
+     *           }
+     */
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

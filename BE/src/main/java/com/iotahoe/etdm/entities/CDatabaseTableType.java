@@ -1,9 +1,12 @@
 package com.iotahoe.etdm.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -21,7 +24,8 @@ public class CDatabaseTableType {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appId")
     Long id;
 
-    @ManyToOne
+    @JoinColumn(name = "db_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     CDatabase database;
 
     String jdbcTableType;

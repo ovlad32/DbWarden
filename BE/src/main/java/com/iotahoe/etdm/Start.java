@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-@EnableWebMvc
+// @EnableWebMvc
 @EnableJpaRepositories
-@PropertySource(value = {"classpath:application.properties"})
+@PropertySource(value = { "classpath:application.properties" })
 
 public class Start {
     public static void main(String[] args) {
-        SpringApplication.run(Start.class,args);
+        SpringApplication.run(Start.class, args);
     }
 }

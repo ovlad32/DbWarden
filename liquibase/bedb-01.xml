@@ -35,7 +35,7 @@
                 constraint c_database_nnl__alias check(alias is not null and alias = trim(alias))
                 );
 
-            create table if not exists c_database_table_types(
+            create table if not exists c_database_table_type(
                 id bigint not null,
                 db_id bigint,
                 jdbc_table_type text,

@@ -13,7 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -74,12 +76,16 @@ public class CDatabaseServiceImpl implements CDatabaseService {
         }
     }
 
-    private CDatabase toCDatabase(final IdReq req, Consumer<DataSource> c) {
+    private CDatabase toConnection(final IdReq req, BiFunction<CDatabase, Connection, CDatabase> f) {
         if (req == null || req.getId() == null) {
             throw new IllegalArgumentException();
         }
-        final CDatabase database = databaseRepository.getOne(req.getId());
-        c.accept(toDataSource(database));
+        CDatabase database = databaseRepository.getOne(req.getId());
+        try (Connection conn = toDataSource(database).getConnection()) {
+            database = f.apply(database, conn);
+        } catch (SQLException e) {
+            logger.error("Opening a new connection: ", e);
+        }
         return database;
     }
 
@@ -121,17 +127,11 @@ public class CDatabaseServiceImpl implements CDatabaseService {
 
     @Override
     public CDatabaseResp checkAvailability(final IdReq req) {
-        AtomicReference<CDatabase.Status> status = new AtomicReference(CDatabase.Status.UNKNOWN);
-        final CDatabase db = toCDatabase(req, (ds) -> {
-            try (Connection conn = ds.getConnection()) {
-                if (!conn.isClosed()) {
-                    status.set(CDatabase.Status.AVAILABLE);
-                }
-            } catch (final SQLException e) {
-                status.set(CDatabase.Status.DEAD);
-            }
+        final CDatabase db = toConnection(req, (dbi, conn) -> {
+            dbi.setStatus(CDatabase.Status.AVAILABLE.name());
+            return dbi;
         });
-        databaseRepository.updateAvailability(req.getId(), status.get());
+        databaseRepository.updateAvailability(req.getId(), db.getStatus());
         final CDatabaseResp resp = CDatabaseMapper.INSTANCE.toResp(db);
         resp.setWhenAvailable(ZonedDateTime.now());
         return resp;

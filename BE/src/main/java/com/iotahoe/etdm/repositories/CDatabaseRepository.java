@@ -16,5 +16,5 @@ public interface CDatabaseRepository extends JpaRepository<CDatabase, Long>, Jpa
 
     @Transactional
     @Query("update CDatabase set status = :status, whenAvailable = current_timestamp where id =:id ")
-    void updateAvailability(@Param("id") Long id, @Param("status") CDatabase.Status status);
+    void updateAvailability(@Param("id") Long id, @Param("status") String status);
 }
