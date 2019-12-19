@@ -101,7 +101,7 @@
     </changeSet>
     <changeSet id="initial-data" author="V">
         <sql><![CDATA[
-        insert into r_database_type values('ORACLE', 'Oracle', 'rdbms', 'no-class-yet',1000);
+        insert into r_database_type values('ORACLE', 'Oracle', 'rdbms', 'oracle.jdbc.driver.OracleDriver',1000);
         insert into r_database_type values('MSSQL', 'MS-SQL', 'rdbms', 'no-class-yet', 2000);
         insert into r_database_type values('SYBASE', 'Sybase', 'rdbms', 'no-class-yet', 3000);
         insert into r_database_type values('DB2-LUW', 'DB2 for LUW', 'rdbms', 'no-class-yet', 4000);

@@ -12,10 +12,8 @@ import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -65,7 +63,7 @@ public class CDatabaseServiceImpl implements CDatabaseService {
         }
 
         try {
-            final DataSourceBuilder dsb = DataSourceBuilder.create();
+            final DataSourceBuilder<?> dsb = DataSourceBuilder.create();
             dsb.driverClassName(rtype.getDriver());
             dsb.username(req.getLogin());
             dsb.password(req.getPassword());
@@ -90,7 +88,7 @@ public class CDatabaseServiceImpl implements CDatabaseService {
     }
 
     @Override
-    public Map<String, String> validateRequest(final IDatabaseReq req) {
+    public Map<String, String> validateDataSourceRequisites(final IDatabaseReq req) {
         final Map<String, String> messages = new HashMap<>();
 
         if (Objects.isNull(req.getType())) {

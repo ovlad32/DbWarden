@@ -5,6 +5,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class IdReq {
+public class IidRequest {
     Long Id;
 }

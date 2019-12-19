@@ -11,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 public interface CDatabaseService {
     Page<CDatabaseResp> all(Pageable pageable, Map<String, String> filters);
 
-    Map<String, String> validateRequest(IDatabaseReq req);
+    Map<String, String> validateDataSourceRequisites(IDatabaseReq req);
+
+    Map<String, String> validateDatabaseAttributes(IDatabaseReq req);
 
     CDatabaseResp checkAvailability(IdReq req);
 

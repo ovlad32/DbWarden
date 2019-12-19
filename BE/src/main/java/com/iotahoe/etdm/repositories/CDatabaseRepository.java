@@ -1,7 +1,5 @@
 package com.iotahoe.etdm.repositories;
 
-import java.time.ZonedDateTime;
-
 import javax.transaction.Transactional;
 
 import com.iotahoe.etdm.entities.CDatabase;

@@ -10,3 +10,4 @@ FE/node
 boostrapjars/
 */bootstrapjars/
 boostrapjars/*
+BE/lib/*
