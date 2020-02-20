@@ -5,6 +5,8 @@
     <changeSet id="initial" author="V">
         <sql><![CDATA[
 
+	    SET search_path = dbw;
+
             create sequence if not exists app_id increment by 50;
 
             create table if not exists r_database_type(
@@ -23,7 +25,7 @@
 
 
             create table if not exists c_database (
-                id bigint not null,
+                id bigint not null  DEFAULT nextval('app_id'),
                 type varchar(50),
                 alias varchar(50),
                 url varchar(2000),
@@ -119,11 +121,11 @@ values (1,'ORACLE','Oracle AWS','jdbc:oracle:thin:@oracle.aws.io-tahoe.com:1521:
     <changeSet id="initial-grant" author="V">
         <sql><![CDATA[
         grant select on sequence dbw.app_id to dbwa;
-        grant select,insert,update on r_database_type to dbwa;
-        grant select,insert,update on c_database to dbwa;
-        grant select,insert,update on x_snapshot to dbwa;
-        grant select,insert,update on x_table to dbwa;
-        grant select,insert,update on x_table_column to dbwa;
+        grant select,insert,update on dbw.r_database_type to dbwa;
+        grant select,insert,update on dbw.c_database to dbwa;
+        grant select,insert,update on dbw.x_snapshot to dbwa;
+        grant select,insert,update on dbw.x_table to dbwa;
+        grant select,insert,update on dbw.x_table_column to dbwa;
         ]]></sql>
     </changeSet>
 

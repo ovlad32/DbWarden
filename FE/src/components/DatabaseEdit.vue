@@ -17,7 +17,7 @@
       </b-form-group>
       <b-form-group label="Alias:">
         <b-input id="alias" v-model="item.alias" required :state="isAliasOk" />
-        <b-form-invalid-feedback :state="isAliasOk">Provide an meaningful name for the database</b-form-invalid-feedback>
+        <b-form-invalid-feedback :state="isAliasOk">Provide a meaningful name for the database</b-form-invalid-feedback>
       </b-form-group>
       <b-form-group label="URI:">
         <b-input id="uri" v-model="item.uri" required :state="isUriOk" />
@@ -45,6 +45,7 @@
 <script>
 //import { mapState, mapActions } from "vuex";
 import DbApi from "../api/databases";
+import { eventBus } from "../eventBus";
 export default {
   props: {
     id: { type: [Number, String] }
@@ -57,7 +58,16 @@ export default {
   },
   methods: {
     save() {
-      DbApi.save(this.item);
+      DbApi.save(this.item).then( r=> {
+        if (r.data.success) {
+          if(r.status === 201) {
+            this.item.id = r.data.id;
+            eventBus.$emit("databaseDetailsCreated", {message: this.item});
+          } else {
+            eventBus.$emit("databaseDetailsCreated", {message: this.item});
+          }
+        }
+      });
     },
     checkParams() {
       DbApi.checkParams(this.item);
@@ -77,8 +87,9 @@ export default {
 
   mounted() {
     DbApi.getTypes().then(r => {
-      this.types = r.data;
+      this.types = r.data.rows
     });
+    
     if (this.id) {
       DbApi.getAll({ id: this.id }).then(r =>
         r.data.content.forEach(item => {
