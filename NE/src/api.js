@@ -101,13 +101,14 @@ module.exports = function(app) {
 		dbc
 			.query(
 				`
-                select t.id, t.alias, t.url, t.login, t.when_available
+                select t.id, t.type, t.alias, t.url, t.login, t.when_available,
+                   r.name as type_name
                   from c_database t
                     inner join r_database_type r on r.type = t.type
-                    where $1::text is null or 
-                        t.alias like '%'||$1::text||'%'
+                    where cast ($1 as text) is null or 
+                        t.alias like '%'||cast($1 as text)||'%'
                     `,
-				[ filters.searchString ]
+				[ filters.searchString || null ]
 			)
 			.then((rs) => {
 				res.send({ rowCount: rs.rowCount, rows: rs.rows });
