@@ -25,14 +25,27 @@
       </b-table>
             
       -->
-      <database-item v-for="item in items" v-bind:key="item.id" v-bind="item" />
+      <div v-for="td in dbByType" v-bind:key="td[0].type">
+        <div>
+          <img class="vendor-logo" v-bind:src="typeIcons[td[0].type]" />
+          <span>{{td[0].type_name}}</span>
+        </div>
+        <database-item v-for="db in td" v-bind:key="db.id" v-bind:db="db" />
+      </div>
     </div>
   </div>
 </template>
 <style scoped>
+.var {
+  --logo-width: 32px;
+}
+.vendor-logo {
+  width: var(--logo-width);
+  height: var(--logo-width);
+}
 </style>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import DatabaseItem from "./DatabaseItem.vue";
 
 export default {
@@ -40,15 +53,30 @@ export default {
     DatabaseItem
   },
   computed: {
-    ...mapState({
-      items: state => state.mDatabases.items
-    })
+    ...mapGetters({
+      dbs: "db-store/all",
+      dbByType: "db-store/dbByType",
+      typeIcons: "db-store/typeIcons"
+    }),
+    dbByType() {
+      let result = [];
+      //  debugger;
+      this.dbs.forEach(e => {
+        for (let t of result) {
+          if (t[0].type === e.type) {
+            t.push(e);
+            return;
+          }
+        }
+        result.push([e]);
+      });
+      return result;
+    }
   },
-  methods: {
-    ...mapActions("mDatabases", ["fetchAll"])
-  },
+
   mounted() {
-    this.fetchAll();
+    this.$store.dispatch("db-store/initTypes");
+    this.$store.dispatch("db-store/initAll");
   }
 };
 </script>

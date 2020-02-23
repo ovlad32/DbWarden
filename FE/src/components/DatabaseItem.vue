@@ -2,24 +2,26 @@
   <div class="app-box d-inline-block border border-solid p-2" ref="box">
     <ul class="border-bottom mb-1 text-nowrap">
       <li class="d-inline-block">
-        <img class="vendor-logo" v-bind:src="iconFile" />
+        <img class="vendor-logo" src="@/assets/db-icons/default.svg" />
       </li>
       <li
         style="width: calc(100% - 32px);"
         class="d-inline-block pl-1 align-middle font-weight-bold text-truncate"
-      >{{type}}</li>
+      >{{db.alias}}</li>
     </ul>
     <ul class="text-nowrap">
       <li class="d-inline-block">
-        <fa icon="signal" :title="availableTitle" @click="checkAvailability(id)" />
+        <!--
+        <fa icon="signal" :title="availableTitle" @click="checkAvailability(item.id)" />
+        -->
       </li>
       <router-link
         style="width: calc(100% - 1rem);"
         class="d-inline-block pl-1 text-truncate"
         t2ag="li"
-        :to="{name:'database-edit',params:{id}}"
+        :to="{name:'database-edit',params:{id:db.id}}"
       >
-        <a href="#">{{alias}} {{alias}}</a>
+        <a href="#">{{db.alias}} {{db.alias}}</a>
       </router-link>
     </ul>
 
@@ -75,25 +77,9 @@ import { eventBus } from "../eventBus";
 export default {
   mixins: [fmt],
   props: {
-    id: {
-      type: Number,
+    db: {
+      type: Object,
       requited: true
-    },
-    type: {
-      type: String,
-      requited: true
-    },
-    alias: {
-      type: String,
-      requited: true
-    },
-    whenAvailable: {
-      type: Number,
-      requited: true
-    },
-    available: {
-      type: Boolean,
-      required: true
     }
   },
 
@@ -103,13 +89,14 @@ export default {
   },
   computed: {
     iconFile() {
-      return DbApi.getIconFileName(this.type);
-    },
+      return DbApi.getIconFileName(this.db.type);
+    } /*,
     availableTitle() {
       return "Last check at " + this.fullDateTime(this.whenAvailable);
-    }
+    }*/
   },
   methods: {
+    /*
     checkAvailability(id) {
       DbApi.checkAvailability(id).then(r => {
         if (r.data.errorMessages && r.data.errorMessages !== null) {
@@ -121,9 +108,9 @@ export default {
           this.fetchById(id);
         }
       });
-    },
-    ...mapActions("mDatabases", ["fetchById"]),
-    ...mapActions("mMessages", ["error"])
+    },*/
+    ...mapActions("db-store", ["fetchById"]),
+    ...mapActions("msg-store", ["error"])
   }
 };
 </script>

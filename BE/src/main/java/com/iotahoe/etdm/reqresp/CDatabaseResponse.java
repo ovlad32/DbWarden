@@ -1,4 +1,4 @@
-package com.iotahoe.etdm.services.reqresp;
+package com.iotahoe.etdm.reqresp;
 
 import java.time.ZonedDateTime;
 import java.util.Map;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CDatabaseResp {
+public class CDatabaseResponse {
     Long id;
     String type;
     String alias;

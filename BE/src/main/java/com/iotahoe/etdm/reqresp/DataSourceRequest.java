@@ -1,6 +1,4 @@
-package com.iotahoe.etdm.services;
-
-import java.util.Properties;
+package com.iotahoe.etdm.reqresp;
 
 /**
  * IDataSourceRequest
@@ -16,7 +14,4 @@ public interface DataSourceRequest {
     public String getLogin();
 
     public String getPassword();
-
-    public Properties getDriverParams();
-
 }

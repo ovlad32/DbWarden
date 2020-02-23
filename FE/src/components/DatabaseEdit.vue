@@ -1,6 +1,6 @@
 <template>
   <div class="dbedit">
-    <p class="db-title">New Database Server Details</p>
+    <p class="db-title">New data source server details</p>
 
     <b-form class="databaseConfig" style="background:lightyellow" @submit.stop.prevent novalidate>
       <b-form-group label="Type:" label-for="typeFormId">
@@ -17,11 +17,11 @@
       </b-form-group>
       <b-form-group label="Alias:">
         <b-input id="alias" v-model="item.alias" required :state="isAliasOk" />
-        <b-form-invalid-feedback :state="isAliasOk">Provide a meaningful name for the database</b-form-invalid-feedback>
+        <b-form-invalid-feedback :state="isAliasOk">Provide a meaningful name for the data source</b-form-invalid-feedback>
       </b-form-group>
       <b-form-group label="URI:">
         <b-input id="uri" v-model="item.uri" required :state="isUriOk" />
-        <b-form-invalid-feedback :state="isUriOk">Provide the URI of the database</b-form-invalid-feedback>
+        <b-form-invalid-feedback :state="isUriOk">Provide a URI of the data source</b-form-invalid-feedback>
       </b-form-group>
       <b-form-group label="Login:">
         <b-input id="login" v-model="item.login" />
@@ -44,36 +44,24 @@
 
 <script>
 //import { mapState, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import DbApi from "../api/databases";
 import { eventBus } from "../eventBus";
 export default {
   props: {
+    //  types: { type: Array },
     id: { type: [Number, String] }
   },
   data() {
     return {
-      types: [],
       item: {}
     };
   },
-  methods: {
-    save() {
-      DbApi.save(this.item).then( r=> {
-        if (r.data.success) {
-          if(r.status === 201) {
-            this.item.id = r.data.id;
-            eventBus.$emit("databaseDetailsCreated", {message: this.item});
-          } else {
-            eventBus.$emit("databaseDetailsCreated", {message: this.item});
-          }
-        }
-      });
-    },
-    checkParams() {
-      DbApi.checkParams(this.item);
-    }
-  },
+
   computed: {
+    ...mapGetters({
+      types: "db-store/allTypes"
+    }),
     isTypeOk() {
       return "type" in this.item;
     },
@@ -84,19 +72,39 @@ export default {
       return "uri" in this.item && this.item.uri.trim().length > 0;
     }
   },
-
+  methods: {
+    //...mapActions([{ initTypes: "db-store/initTypes" }]),
+    save() {
+      DbApi.save(this.item).then(r => {
+        if (r.data.success) {
+          if (r.status === 201) {
+            this.item.id = r.data.id;
+            eventBus.$emit("databaseDetailsCreated", { message: this.item });
+          } else {
+            eventBus.$emit("databaseDetailsCreated", { message: this.item });
+          }
+        }
+      });
+    },
+    checkParams() {
+      DbApi.checkParams(this.item);
+    }
+  },
   mounted() {
-    DbApi.getTypes().then(r => {
-      this.types = r.data.rows
+    this.$store.dispatch("db-store/initTypes", { forcibly: false });
+    //this.initTypes();
+    //this.state.
+    /*DbApi.getTypes().then(r => {
+      this.types = r.data.rows;
     });
-    
+
     if (this.id) {
       DbApi.getAll({ id: this.id }).then(r =>
         r.data.content.forEach(item => {
           this.item = item;
         })
       );
-    }
+    }*/
   }
 };
 </script>

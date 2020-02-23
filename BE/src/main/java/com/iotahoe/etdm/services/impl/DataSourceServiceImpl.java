@@ -1,20 +1,22 @@
 package com.iotahoe.etdm.services.impl;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.BiFunction;
 
+import com.iotahoe.etdm.reqresp.CDatabaseResponse;
+import com.iotahoe.etdm.reqresp.DataSourceRequest;
 import com.iotahoe.etdm.services.DataSourceService;
-import com.iotahoe.etdm.services.IDataSourceRequest;
 
 /**
  * DataSourceImpl
  */
-public class DataSourceServiceImpl implements DataSourceService {
+public class DataSourceServiceImpl implements DataSourceService<CDatabaseResponse> {
 
     @Override
-    public Map<String, String> validate(IDataSourceRequest ireq) {
+    public Map<String, String> validate(DataSourceRequest ireq) {
         final Map<String, String> messages = new HashMap<>();
 
         if (Objects.isNull(ireq.getType())) {
@@ -23,12 +25,11 @@ public class DataSourceServiceImpl implements DataSourceService {
             messages.put("type", "DBMS type is not specified");
         }
 
-        if (Objects.isNull(ireq.getAlias())) {
-            messages.put("alias", "Alias is null");
-        } else if (ireq.getAlias().trim().isEmpty()) {
-            messages.put("alias", "Alias is not specified");
-        }
-
+        /*
+         * if (Objects.isNull(ireq.getAlias())) { messages.put("alias",
+         * "Alias is null"); } else if (ireq.getAlias().trim().isEmpty()) {
+         * messages.put("alias", "Alias is not specified"); }
+         */
         if (Objects.isNull(ireq.getUrl())) {
             messages.put("url", "URL is null");
         } else if (ireq.getUrl().trim().isEmpty()) {
@@ -51,13 +52,14 @@ public class DataSourceServiceImpl implements DataSourceService {
     }
 
     @Override
-    public Map<String, String> testConnection(IDataSourceRequest ireq) {
+    public Map<String, String> testConnection(DataSourceRequest ireq) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Object withConnection(IDataSourceRequest iReq, BiFunction f) {
+    public CDatabaseResponse withConnection(DataSourceRequest iReq,
+            BiFunction<CDatabaseResponse, Connection, CDatabaseResponse> f) {
         // TODO Auto-generated method stub
         return null;
     }

@@ -39,7 +39,7 @@ import { mapGetters } from "vuex";
 export default {
   computed: {
     ...mapGetters({
-      messageCount: "mMessages/getErrorCount"
+      messageCount: "msg-store/getErrorCount"
     })
   }
 };

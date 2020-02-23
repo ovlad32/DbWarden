@@ -1,13 +1,11 @@
-package com.iotahoe.etdm.services.reqresp;
+package com.iotahoe.etdm.reqresp;
 
 import lombok.Data;
 
 import java.util.Properties;
 
-import com.iotahoe.etdm.services.*;
-
 @Data
-public class DatabaseRequestImpl implements DataSourceRequest, IdReqest {
+public class DatabaseRequestImpl implements DataSourceRequest, IdAliasAware {
     Long id;
     String type;
     String alias;

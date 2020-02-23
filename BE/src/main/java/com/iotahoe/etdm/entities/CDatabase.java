@@ -8,15 +8,13 @@ import java.util.List;
 import javax.persistence.*;
 import javax.persistence.Table;
 
-import com.iotahoe.etdm.services.IDatabaseReq;
-
 import org.hibernate.annotations.Type;
 
 @Entity
 @Table(schema = "dbw", name = "c_database")
 @Data
 @SequenceGenerator(name = "appId", schema = "dbw", sequenceName = "app_id")
-public class CDatabase implements IDatabaseReq {
+public class CDatabase {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appId")
     private Long Id;
@@ -34,14 +32,6 @@ public class CDatabase implements IDatabaseReq {
 
     @OneToMany(mappedBy = "database")
     private List<CDatabaseTableType> jdbcTableTypes;
-
-    @Override
-    public String getType() {
-        if (this.databaseType != null) {
-            return this.databaseType.getType();
-        }
-        return null;
-    }
 
     public static enum Status {
         AVAILABLE, UNKNOWN, DEAD
