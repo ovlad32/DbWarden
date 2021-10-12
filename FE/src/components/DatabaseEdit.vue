@@ -60,7 +60,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      types: "db-store/allTypes"
+      types: "db-store/types"
     }),
     isTypeOk() {
       return "type" in this.item;

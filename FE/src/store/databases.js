@@ -4,14 +4,14 @@ const state = {
 	types: [],
 	typeIcons: {},
 	databases: [],
-	dbByType: []
+	dbGroupedByType: []
 };
 
 const getters = {
-	allTypes: (state) => state.types,
-	all: (state) => state.databases,
+	types: (state) => state.types,
+	databases: (state) => state.databases,
 	typeIcons: (state) => state.typeIcons,
-	dbByType: (state) => state.dbByType,
+	dbGroupedByType: (state) => state.dbGroupedByType,
 
 	findById: (state) => (id) => {
 		return state.databases.find((db) => db.id == id);
@@ -30,20 +30,14 @@ const actions = {
 		}
 	},
 
-	initAll(context) {
-		dbAPI.fetch().then((r) => {
-			let dbByType = [];
-			r.data.rows.forEach((e) => {
-				for (let t of dbByType) {
-					if (t[0].type === e.type) {
-						t.push(e);
-						return;
-					}
-				}
-				dbByType.push([ e ]);
-			});
-			context.commit('store-all', r.data.rows);
-			context.commit('store-by-type', dbByType);
+	initDatabases(context) {
+		dbAPI.fetchDatabases().then((r) => {
+			context.commit('store-databases', r.data.rows);
+		});
+	},
+	initDatabasesGroupedByType(context) {
+		dbAPI.fetchDatabasesGroupedByType().then((r) => {
+			context.commit('store-db-grouped-by-type',  r.data.rows);
 		});
 	}
 
@@ -60,11 +54,11 @@ const mutations = {
 		state.types = data;
 	},
 
-	'store-all'(state, data) {
+	'store-databases'(state, data) {
 		state.databases = data;
 	},
-	'store-by-type'(state, data) {
-		state.dbByType = data;
+	'store-db-grouped-by-type'(state, data) {
+		state.dbGroupedByType = data;
 	},
 	'store-icon'(state, data) {
 		state.typeIcons[data.type] = data.resource;

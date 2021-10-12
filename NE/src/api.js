@@ -79,9 +79,9 @@ module.exports = function(app) {
 					} else {
 						return conn.query(
 							`
-                            insert into c_database(type,alias,url,login,password) values ($1, $2, $3, $4, $5) returning id
+                            insert into c_database(type,alias,url) values ($1, $2, $3) returning id
                             `,
-							[ item.type, item.alias, item.url, item.login, item.password ]
+							[ item.type, item.alias, item.url ]
 						);
 					}
 				},
@@ -101,11 +101,10 @@ module.exports = function(app) {
 		dbc
 			.query(
 				`
-                select t.id, t.type, t.alias, t.url, t.login, t.when_available,
-                   r.name as type_name
-                  from c_database t
-                    inner join r_database_type r on r.type = t.type
-                    where cast ($1 as text) is null or 
+                select t.*,
+				   (select row_to_json(r) as r_database_type from r_database_type r where r.type = t.type)	
+				     from c_database t
+                    where cast($1 as text) is null or 
                         t.alias like '%'||cast($1 as text)||'%'
                     `,
 				[ filters.searchString || null ]
@@ -119,5 +118,30 @@ module.exports = function(app) {
 			});
 	});
 
+	app.get('/databases/groupedByType',jsonParser, (req,res) => {
+		const filters = req.body;
+		dbc.query(`
+		select * from (
+			select r.type, r.name,
+				(select json_agg(d) as c_databases 
+					from dbw.c_database d 
+					where d.type = r.type 
+					and d.is_deleted = false
+					and (cast($1 as text) is null or 
+						d.alias like '%'||cast($1 as text)||'%') )
+			from r_database_type r
+			where cast($1 as text) is null or 
+				r.name like '%'||cast($1 as text)||'%'
+		)  as t 
+		where t.c_databases is not null
+		`,[filters.searchString || null])
+		.then((rs) => {
+			res.send({ rowCount: rs.rowCount, rows: rs.rows });
+		})
+		.catch((err) => {
+			res.status(500).send(err);
+			console.error(err);
+		});
+	});
 	//other routes..
 };

@@ -29,13 +29,24 @@
                 type varchar(50),
                 alias varchar(50),
                 url varchar(2000),
-                login varchar(50),
-                password varchar(50),
                 when_available timestamptz,
+                is_deleted boolean default false,
                 constraint c_database_pk primary key(id),
                 constraint c_database_fk_type foreign key(type) references r_database_type(type),
                 constraint c_database_nnl__alias check(alias is not null and alias = trim(alias))
                 );
+
+	    create table if not exists c_database_cred(
+	    	db_id bigint not null,
+                login varchar(50),
+                password varchar(50),
+                constraint c_database_cred__pk primary key(db_id),
+                constraint c_database_cred__fk_db_id foreign key(db_id) references c_database(id),
+		constraint c_database_cred__login check(login = trim(login)),
+		constraint c_database_cred__pwd check(password = trim(password))
+		);
+
+
 
             create table if not exists c_database_table_type(
                 id bigint not null,

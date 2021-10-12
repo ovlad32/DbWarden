@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_65" class="java.beans.XMLDecoder">
+<!--
+ <object class="java.util.ArrayList">
+  <void method="add">
+    <void property="name">
+     <string>as400</string>
+    </void>
+   <object class="workbench.db.ConnectionProfile">
+    <void property="autocommit">
+     <boolean>true</boolean>
+    </void>
+    <void property="driverName">
+     <string>IBM DB2 UDB for AS/400 (iSeries)</string>
+    </void>
+    <void property="driverclass">
+     <string>com.ibm.as400.access.AS400JDBCDriver</string>
+    </void>
+    <void property="password">
+     <string>MURZIK17</string>
+    </void>
+    <void property="storeExplorerSchema">
+     <boolean>true</boolean>
+    </void>
+    <void property="url">
+     <string>jdbc:as400://192.168.200.45</string>
+    </void>
+    <void property="useSeparateConnectionPerTab">
+     <boolean>true</boolean>
+    </void>
+    <void property="username">
+     <string>QSECOFR</string>
+    </void>
+   </object>
+  </void>
+-->
+<!--
+  <void method="add">
+   <object class="workbench.db.ConnectionProfile">
+    <void property="name">
+     <string>aws_gp_int</string>
+    </void>
+    <void property="autocommit">
+     <boolean>true</boolean>
+    </void>
+    <void property="defaultFetchSize">
+     <int>50000</int>
+    </void>
+    <void property="driverName">
+     <string>PostgreSQL</string>
+    </void>
+    <void property="driverclass">
+     <string>org.postgresql.Driver</string>
+    </void>
+    <void property="password">
+     <string>kajotrecuv</string>
+    </void>
+    <void property="storeExplorerSchema">
+     <boolean>true</boolean>
+    </void>
+    <void property="url">
+     <string>jdbc:postgresql://172.31.25.17:5432/postgres</string>
+    </void>
+    <void property="useSeparateConnectionPerTab">
+     <boolean>true</boolean>
+    </void>
+    <void property="username">
+     <string>astra</string>
+    </void>
+   </object>
+  </void> 
+  -->
+  <void method="add">
+   <object class="workbench.db.ConnectionProfile">
+    <void property="name">
+     <string>ms.aws</string>
+    </void>
+    <void property="autocommit">
+     <boolean>true</boolean>
+    </void>
+    <void property="defaultFetchSize">
+     <int>50000</int>
+    </void>
+    <void property="driverName">
+     <string>jTDS</string>
+    </void>
+    <void property="driverclass">
+     <string>net.sourceforge.jtds.jdbc.Driver</string>
+    </void>
+    <void property="password">
+     <string>dtkbr2345</string>
+    </void>
+    <void property="storeExplorerSchema">
+     <boolean>true</boolean>
+    </void>
+    <void property="url">
+     <string>jdbc:jtds:sqlserver://edtm-dev.cxldw53gfydw.eu-central-1.rds.amazonaws.com:1433/etdm</string>
+    </void>
+    <void property="useSeparateConnectionPerTab">
+     <boolean>true</boolean>
+    </void>
+    <void property="username">
+     <string>admin</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="workbench.db.ConnectionProfile">
+    <void property="name">
+     <string>oracle.aws</string>
+    </void>
+    <void property="defaultFetchSize">
+     <int>50000</int>
+    </void>
+    <void property="driverName">
+     <string>Oracle</string>
+    </void>
+    <void property="driverclass">
+     <string>oracle.jdbc.OracleDriver</string>
+    </void>
+    <void property="emptyStringIsNull">
+     <boolean>true</boolean>
+    </void>
+    <void property="password">
+     <string>adm</string>
+    </void>
+    <void property="storeExplorerSchema">
+     <boolean>true</boolean>
+    </void>
+    <void property="url">
+     <string>jdbc:oracle:thin://@52.29.23.240:1521/ORCL</string>
+    </void>
+    <void property="useSeparateConnectionPerTab">
+     <boolean>true</boolean>
+    </void>
+    <void property="username">
+     <string>adm</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="workbench.db.ConnectionProfile">
+    <void property="name">
+     <string>sybase.aws</string>
+    </void>
+    <void property="autocommit">
+     <boolean>true</boolean>
+    </void>
+    <void property="driverName">
+     <string>jTDS</string>
+    </void>
+    <void property="driverclass">
+     <string>net.sourceforge.jtds.jdbc.Driver</string>
+    </void>
+    <void property="includeNullInInsert">
+     <boolean>false</boolean>
+    </void>
+    <void property="password">
+     <string>sekhar</string>
+    </void>
+    <void property="storeExplorerSchema">
+     <boolean>true</boolean>
+    </void>
+    <void property="url">
+     <string>jdbc:jtds:sybase://sybase.aws.io-tahoe.com:5000/pubs3</string>
+    </void>
+    <void property="useSeparateConnectionPerTab">
+     <boolean>true</boolean>
+    </void>
+    <void property="username">
+     <string>sa</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+    <void property="name">
+     <string>db2.kiev</string>
+    </void>
+   <object class="workbench.db.ConnectionProfile">
+    <void property="defaultFetchSize">
+     <int>50000</int>
+    </void>
+    <void property="driverName">
+     <string>IBM DB2</string>
+    </void>
+    <void property="driverclass">
+     <string>com.ibm.db2.jcc.DB2Driver</string>
+    </void>
+    <void property="password">
+     <string>db2inst1-pwd</string>
+    </void>
+    <void property="storeExplorerSchema">
+     <boolean>true</boolean>
+    </void>
+    <void property="url">
+     <string>jdbc:db2://10.200.80.143:50000/SAMPLE</string>
+    </void>
+    <void property="useSeparateConnectionPerTab">
+     <boolean>true</boolean>
+    </void>
+    <void property="username">
+     <string>db2inst1</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="workbench.db.ConnectionProfile">
+    <void property="name">
+     <string>gp.kiev</string>
+    </void>
+    <void property="autocommit">
+     <boolean>true</boolean>
+    </void>
+    <void property="defaultFetchSize">
+     <int>50000</int>
+    </void>
+    <void property="driverName">
+     <string>PostgreSQL</string>
+    </void>
+    <void property="driverclass">
+     <string>org.postgresql.Driver</string>
+    </void>
+    <void property="password">
+     <string>pivotal</string>
+    </void>
+    <void property="storeExplorerSchema">
+     <boolean>true</boolean>
+    </void>
+    <void property="url">
+     <string>jdbc:postgresql://10.200.80.143:5432/postgres</string>
+    </void>
+    <void property="useSeparateConnectionPerTab">
+     <boolean>true</boolean>
+    </void>
+    <void property="username">
+     <string>gpadmin</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="workbench.db.ConnectionProfile">
+    <void property="name">
+     <string>ms.kiev</string>
+    </void>
+    <void property="autocommit">
+     <boolean>true</boolean>
+    </void>
+    <void property="defaultFetchSize">
+     <int>50000</int>
+    </void>
+    <void property="driverName">
+     <string>jTDS</string>
+    </void>
+    <void property="driverclass">
+     <string>net.sourceforge.jtds.jdbc.Driver</string>
+    </void>
+    <void property="password">
+     <string>astra_test1</string>
+    </void>
+    <void property="storeExplorerSchema">
+     <boolean>true</boolean>
+    </void>
+    <void property="url">
+     <string>jdbc:jtds:sqlserver://astra_sql.rokittechua.com:1433/astra_test1</string>
+    </void>
+    <void property="useSeparateConnectionPerTab">
+     <boolean>true</boolean>
+    </void>
+    <void property="username">
+     <string>astra_test1</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="workbench.db.ConnectionProfile">
+    <void property="name">
+     <string>oracle.kiev</string>
+    </void>
+    <void property="defaultFetchSize">
+     <int>50000</int>
+    </void>
+    <void property="driverName">
+     <string>Oracle</string>
+    </void>
+    <void property="driverclass">
+     <string>oracle.jdbc.OracleDriver</string>
+    </void>
+    <void property="password">
+     <string>adm</string>
+    </void>
+    <void property="storeExplorerSchema">
+     <boolean>true</boolean>
+    </void>
+    <void property="url">
+     <string>jdbc:oracle:thin://@10.200.80.55:1521/ORCL</string>
+    </void>
+    <void property="useSeparateConnectionPerTab">
+     <boolean>true</boolean>
+    </void>
+    <void property="username">
+     <string>adm</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="workbench.db.ConnectionProfile">
+    <void property="name">
+     <string>memsql.aws</string>
+    </void>
+    <void property="defaultFetchSize">
+     <int>50000</int>
+    </void>
+    <void property="driverName">
+     <string>MySQL</string>
+    </void>
+    <!--
+    <void property="driverclass">
+     <string>oracle.jdbc.OracleDriver</string>
+    </void>
+    <void property="storeExplorerSchema">
+     <boolean>true</boolean>
+    </void>
+    <void property="useSeparateConnectionPerTab">
+     <boolean>true</boolean>
+    </void>    
+    <void property="password">
+     <string>adm</string>
+    </void>
+    -->
+    <void property="url">
+     <string>jdbc:mysql://172.16.128.43:3306/cra</string>
+    </void>
+    <void property="username">
+     <string>root</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="workbench.db.ConnectionProfile">
+    <void property="name">
+     <string>mysql.aws</string>
+    </void>
+    <void property="defaultFetchSize">
+     <int>50000</int>
+    </void>
+    <void property="driverName">
+     <string>MySQL</string>
+    </void>
+    <!--
+    <void property="driverclass">
+     <string>oracle.jdbc.OracleDriver</string>
+    </void>
+    <void property="storeExplorerSchema">
+     <boolean>true</boolean>
+    </void>
+    <void property="useSeparateConnectionPerTab">
+     <boolean>true</boolean>
+    </void>    
+    -->
+    <void property="url">
+     <string>jdbc:mysql://172.16.128.43:3306/cra</string>
+    </void>
+    <void property="username">
+     <string>admin</string>
+    </void>
+    <void property="password">
+     <string>uuLXJJZ1cxqEPOFkk7CA</string>
+    </void>
+   </object>
+  </void>
+</java>

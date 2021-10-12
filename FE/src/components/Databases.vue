@@ -25,23 +25,38 @@
       </b-table>
             
       -->
-      <div v-for="td in dbByType" v-bind:key="td[0].type">
-        <div>
-          <img class="vendor-logo" v-bind:src="typeIcons[td[0].type]" />
-          <span>{{td[0].type_name}}</span>
+      <div v-for="r in dbGroupedByType" v-bind:key="r.type">
+        <div class="database-type">
+          <img class="type-logo" v-bind:src="typeIcons[r.type]" />
+          <span class="type-name">{{r.name}}</span>
         </div>
-        <database-item v-for="db in td" v-bind:key="db.id" v-bind:db="db" />
+        <database-item v-for="d in r.c_databases" v-bind:key="d.id" v-bind:db="d" />
       </div>
     </div>
   </div>
 </template>
 <style scoped>
 .var {
-  --logo-width: 32px;
+  --logo-width: 64px;
 }
-.vendor-logo {
-  width: var(--logo-width);
-  height: var(--logo-width);
+.type-logo {
+  width2: var(--logo-width);
+  width:48px;
+  height: 48px;
+  padding: 0.2rem;
+}
+.type-name{
+  
+}
+.database-type{
+  background-color: #eee;
+  font-size: 1.2rem;
+  padding: .2rem 0;
+  margin: .5rem 0 .1rem 0;
+}
+.type-name {
+  font-weight: bold;
+
 }
 </style>
 <script>
@@ -55,10 +70,10 @@ export default {
   computed: {
     ...mapGetters({
       dbs: "db-store/all",
-      dbByType: "db-store/dbByType",
+      dbGroupedByType: "db-store/dbGroupedByType",
       typeIcons: "db-store/typeIcons"
-    }),
-    dbByType() {
+    })
+    /*dbGroupedByType() {
       let result = [];
       //  debugger;
       this.dbs.forEach(e => {
@@ -71,12 +86,12 @@ export default {
         result.push([e]);
       });
       return result;
-    }
+    }*/
   },
 
   mounted() {
     this.$store.dispatch("db-store/initTypes");
-    this.$store.dispatch("db-store/initAll");
+    this.$store.dispatch("db-store/initDatabasesGroupedByType");
   }
 };
 </script>

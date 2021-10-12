@@ -11,3 +11,4 @@ boostrapjars/
 */bootstrapjars/
 boostrapjars/*
 BE/lib/*
+*.jar

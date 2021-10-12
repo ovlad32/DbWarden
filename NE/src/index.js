@@ -3,13 +3,21 @@ var cors = require('cors');
 const {cookieSecret} = require('./credentials.js');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+var graphqlHTTP = require('express-graphql');
+var { buildSchema } = require('graphql');
+var schema = buildSchema(`
+  type Query {
+    hello: String
+  }
+`);
+
 
 
 const app = express();
 // 
 app.use(cors())
 
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3005);
 
 app.use(cookieParser(cookieSecret));
 
@@ -36,3 +44,9 @@ app.use((err, req, res, next) => {
     res.send('500 - Server error');
 });
 
+var app = express();
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: true,
+}));

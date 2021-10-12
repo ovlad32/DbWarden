@@ -7,10 +7,19 @@ export default {
 		});
 	},
 
-	fetch(filters) {
+	fetchDatabases(filters) {
 		return axios({
 			method: 'GET',
 			url: 'databases',
+			params: filters
+		}).catch((e) => {
+			throw new Error('Could not retrieve database configurations: ' + e);
+		});
+	},
+	fetchDatabasesGroupedByType(filters) {
+		return axios({
+			method: 'GET',
+			url: 'databases/groupedByType',
 			params: filters
 		}).catch((e) => {
 			throw new Error('Could not retrieve database configurations: ' + e);

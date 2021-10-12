@@ -1,5 +1,5 @@
 export default {
   axios: {
-    baseURL: "http://localhost:3001/"
+    baseURL: "http://localhost:3005/"
   }
 };
